@@ -1,0 +1,28 @@
+{
+  "memebook": [
+    {
+      "firstname": "Ajay",
+      "lastname": "Ghimire",
+      "email": "ajay@gmail.com",
+      "password": "ajay123",
+      "username": "ajay.gh",
+      "id": 1
+    },
+    {
+      "firstname": "Ajaya",
+      "lastname": "Ghimire",
+      "email": "ajayghimire1998@gmail.com",
+      "password": "dharan123",
+      "username": "ajay,gh",
+      "id": 2
+    },
+    {
+      "firstname": "Ajaya",
+      "lastname": "Ghimire",
+      "email": "ajayghimire1998@gmail.com",
+      "password": "syd123",
+      "username": "ajay,gh",
+      "id": 2
+    }
+  ]
+}
