@@ -1,14 +1,6 @@
 {
   "memebook": [
     {
-      "firstname": "Ajay",
-      "lastname": "Ghimire",
-      "email": "ajay@gmail.com",
-      "password": "ajay123",
-      "username": "ajay.gh",
-      "id": 1
-    },
-    {
       "firstname": "Ajaya",
       "lastname": "Ghimire",
       "email": "ajayghimire1998@gmail.com",
@@ -23,6 +15,40 @@
       "password": "syd123",
       "username": "ajay,gh",
       "id": 2
+    },
+    {
+      "firstname": "ajay",
+      "lastname": "ghimire",
+      "email": "ajay.ghimire@yahoo.com",
+      "password": "dhranA12#",
+      "username": "AjayGhimire",
+      "id": 3
+    },
+    {
+      "firstname": "",
+      "lastname": "",
+      "email": "",
+      "password": "",
+      "username": "",
+      "id": 4
+    },
+    {
+      "firstname": "",
+      "lastname": "",
+      "email": "",
+      "password": "",
+      "confirmPassword": "",
+      "username": "",
+      "id": 5
+    },
+    {
+      "firstname": "",
+      "lastname": "",
+      "email": "",
+      "password": "",
+      "confirmPassword": "",
+      "username": "",
+      "id": 6
     }
   ]
 }

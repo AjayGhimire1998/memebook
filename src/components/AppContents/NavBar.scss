@@ -1,0 +1,41 @@
+.nav-bar {
+  background-color: rgb(255, 212, 94);
+  display:inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  color: black;
+  width: 100%;
+  
+
+  .meme-book {
+    color: rgb(255, 0, 0);
+    text-shadow: 0 0 2px black;
+    font-family: Copperplate, Copperplate Gothic Light, fantasy;
+    font-size: 30px;
+    padding: 2px;
+    line-height: 20px;
+    text-decoration: none;
+    position: relative;
+    float: left;
+    justify-content: flex-start;
+  }
+
+  .meme {
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    text-align: center;
+
+    &:hover{
+        background-color: #ffbb00;
+        color: black;
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+  }
+}

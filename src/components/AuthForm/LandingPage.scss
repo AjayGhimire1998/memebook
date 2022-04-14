@@ -1,0 +1,62 @@
+.landing-page {
+    text-align: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    width: 300px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -150px;
+    background-color: rgb(255, 212, 94);
+    
+
+    .landing-page h3 {
+        font-size: 25px;
+        text-align: center;
+        font-weight: 500;
+        
+      }
+      span {
+        color: red;
+        font-family: Copperplate, Copperplate Gothic Light, fantasy;
+        font-size: 40px;
+        padding: 50px;
+        
+      }
+      .landing-signup {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+      }
+      .landing-login {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+      }
+      .signup-button {
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        background-color: gray;
+        color: white;
+        text-decoration: none;
+      }
+      .signup-button:hover {
+        opacity: 0.6;
+        color: black;
+      }
+      .login-button {
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        background-color: gray;
+        color: white;
+        text-decoration: none;
+      }
+      .login-button:hover {
+        opacity: 0.6;
+        color: black;
+      }
+  }

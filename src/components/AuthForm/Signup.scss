@@ -1,0 +1,51 @@
+.meme-book {
+  color: rgb(255, 0, 0);
+  text-shadow: 0 0 2px black;
+  font-family: Copperplate, Copperplate Gothic Light, fantasy;
+  font-size: 30px;
+  padding: 2px;
+  line-height: 20px;
+  text-decoration: none;
+  position: relative;
+  float: left;
+  justify-content: flex-start;
+}
+.sign-up-form {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    width: 500px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -350px 0 0 -250px;
+    padding: 50px;
+    background-color: rgb(255, 212, 94);
+    font-size: 15px;
+
+  .required-text {
+    box-shadow: 0 0 15px 0 rgb(255, 0, 0);
+    border: 2px solid rgb(238, 58, 58);
+    border-radius: 7px;
+  }
+  .signup-button {
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+  }
+  .signup-button:hover {
+    opacity: 0.6;
+    color: black;
+  }
+  @media screen and (max-width: 390px) {
+    .sign-up-form{
+      width:100%;
+      top: 60%;
+    }
+  }
+}
+

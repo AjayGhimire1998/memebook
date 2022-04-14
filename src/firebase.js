@@ -1,0 +1,16 @@
+
+import { initializeApp } from "firebase/app";
+import { getAuth} from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: "memebook-7734f.firebaseapp.com",
+  projectId: "memebook-7734f",
+  storageBucket: "memebook-7734f.appspot.com",
+  messagingSenderId: "1063448324089",
+  appId: "1:1063448324089:web:b00101765fef43891b7f28"
+};
+
+
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
