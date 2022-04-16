@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import "./Signup.scss";
 
 export default function SignUp() {
@@ -19,7 +18,6 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPasword] = useState("");
-  // const [passwordMatch, setPasswordMatch] = useState(true);
   const [confirmError, setConfirmError] = useState(true);
 
   function validateEmail(e) {
@@ -76,7 +74,7 @@ export default function SignUp() {
     setConfirmPasword(e.target.value);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (password !== confirmPassword) {
       // setPasswordMatch(false);
       setConfirmError(true);
@@ -84,7 +82,6 @@ export default function SignUp() {
       setConfirmError(false);
     }
   }, [confirmPassword]);
-  
 
   const history = useHistory();
 
@@ -133,37 +130,6 @@ export default function SignUp() {
           >
             <label>Sign Up</label>
           </div>
-          {/* <div>
-          <br />
-          <label htmlFor="first-name">First Name: </label>
-          <input
-            type="text"
-            onChange={(e) => {
-              // handleInput(e);
-              requiredField(e);
-            }}
-            name="firstname"
-            className={requireTextField ? "required-text" : ""}
-          />
-          <br />
-          <small style={{ color: "red" }}>
-            <i>{requiredError}</i>
-          </small>
-        </div>
-        <div>
-          <br />
-          <label htmlFor="last-name">Last Name: </label>
-          <input
-            type="text"
-            name="lastname"
-            className={requireTextField ? "required-text" : ""}
-            // onChange={handleInput}
-          />
-          <br />
-          <small style={{ color: "red" }}>
-            <i>{requiredError}</i>
-          </small>
-        </div> */}
           <div>
             <br />
             <label htmlFor="email">Email: </label>
@@ -200,7 +166,6 @@ export default function SignUp() {
               name="password"
               onChange={(e) => {
                 handlePasswordInput(e);
-                // passwordCheck(authData, e);
                 validatePassword(e);
               }}
               className={passwordIsValid ? "" : "required-text"}
@@ -212,11 +177,6 @@ export default function SignUp() {
             <br />
             <input type="checkbox" onClick={tooglePassword} />
             <small>{showPassword ? " Hide " : " Show "} Password</small>
-            {/* <br />
-          <small style={{ color: "red" }}>
-            <i>{passwordError}</i>
-          </small>
-          <br /> */}
             <br />
             <small>
               <i>
@@ -241,10 +201,8 @@ export default function SignUp() {
               type={showConfirmPass ? "text" : "password"}
               name="confirmPassword"
               onChange={(e) => {
-                // handleInput(e);
                 requiredField(e);
                 handleConfirmPasswordInput(e);
-                // confirmPasswordChange(e);
               }}
               className={requireTextField ? "required-text" : ""}
             />
@@ -266,23 +224,6 @@ export default function SignUp() {
               )}
             </i>
           </div>
-          {/* <div>
-          <br />
-          <label htmlFor="username">Set UserName: </label>
-          <input
-            type="text"
-            name="username"
-            onChange={(e) => {
-              // handleInput(e);
-              requiredField(e);
-            }}
-            className={requireTextField ? "required-text" : ""}
-          />
-          <br />
-          <small style={{ color: "red" }}>
-            <i>{requiredError}</i>
-          </small>
-        </div> */}
           <br /> <br />
           <small>
             <i>

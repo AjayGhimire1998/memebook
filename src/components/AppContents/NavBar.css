@@ -1,0 +1,85 @@
+.nav-bar {
+  background-color: rgb(255, 212, 94);
+  display: inline-flex;
+  align-items: center;
+  justify-content:space-evenly;
+  padding: 20px;
+  color: black;
+  width: 100%;
+}
+
+.meme-book {
+  color: rgb(255, 0, 0);
+  text-shadow: 0 0 2px black;
+  font-family: Copperplate, Copperplate Gothic Light, fantasy;
+  font-size: 30px;
+  padding: 2px;
+  line-height: 20px;
+  text-decoration: none;
+  position: relative;
+  float: left;
+  border: none;
+  background-color: rgb(255, 212, 94);;
+}
+
+.meme-upload {
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+  background-color: rgb(255, 212, 94);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-image: url(./images/add.PNG);
+  text-decoration: none;
+  margin-left: 100px;
+  text-align: center;
+}
+
+.meme-upload:hover {
+  background-color: #ffbb00;
+  color: black;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+.meme-create {
+  border: none;
+  cursor: pointer;
+  padding: 22px;
+  background-color: rgb(255, 212, 94);
+  background-size: 47px;
+  background-repeat: no-repeat;
+  background-image: url(./images/create.webp);
+  text-decoration: none;
+  margin-left: 100px;
+  text-align: center;
+}
+
+.meme-create:hover {
+  background-color: #ffbb00;
+  color: black;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+.meme-profile {
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+  background-color: rgb(255, 212, 94);
+  background-size: 50px;
+  background-repeat: no-repeat;
+  /* background-image: url(./images/user.png); */
+  text-decoration: none;
+  margin-left: 100px;
+  text-align: center;
+}
+
+.meme-profile:hover {
+  background-color: #ffbb00;
+  color: black;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+#custom{
+  background-color: rgb(255, 212, 94);
+  border: none;
+}

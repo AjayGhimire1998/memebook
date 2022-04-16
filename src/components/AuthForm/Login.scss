@@ -12,17 +12,18 @@
 }
 .login {
   text-align: center;
+  justify-content: center;
+  align-items: center;
   border: 1px solid black;
   border-radius: 10px;
   position: absolute;
-  width: 500px;
+  width: auto;
   z-index: 15;
   top: 50%;
   left: 50%;
-  margin: -350px 0 0 -250px;
-  padding: 50px;
+  transform: translate(-50%, -50%);
   background-color: rgb(255, 212, 94);
-  font-size: 15px;
+  padding: 10px;
 
   .login-button {
     border: none;
@@ -38,9 +39,8 @@
     }
   }
   @media screen and (max-width: 390px) {
-    .login{
-      width:100%;
+    .login {
+      width: 100%;
     }
-    
   }
 }

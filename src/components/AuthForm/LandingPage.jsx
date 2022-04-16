@@ -7,6 +7,7 @@ export default function LandingPage() {
     <div className="landing-page">
       <h3>
         Welcome to <span className="meme-book">MemeBook</span>
+        <br/>
         <small style={{ fontWeight: "200" }}> The Ultimate Meme App</small>
       </h3>
       <br /> <br />

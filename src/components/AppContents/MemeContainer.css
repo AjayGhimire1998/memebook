@@ -1,0 +1,19 @@
+.meme-container{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 60px;
+    height: auto;
+    border: 2px solid black;
+    padding: 10px;
+    background-color: rgba(255, 212, 94, 0.8);;
+
+}
+.meme-image{
+    height: 60%;
+    width: 80%;
+    transition: 1s ease-out;
+}
+.meme-image:hover{
+    transform: scale(0.9);
+}

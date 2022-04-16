@@ -1,4 +1,91 @@
-.container{
-    padding: 30px 50px 50px 50px;
-    max-width: 900px;
+.container {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+
+  .upload-show {
+    display: block;
+
+    .form {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 10px;
+      height: auto;
+      width: auto;
+      margin: 40px;
+      border: 1px solid black;
+      padding: 50px;
+      background-color: rgb(255, 212, 94);
+      box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
+        3px 3px 7px rgba(94, 104, 121, 0.377);
+
+      .label-top {
+        font-size: 30px;
+        font-weight: 700;
+        color: rgb(255, 0, 0);
+        text-shadow: 0 0 2px black;
+        font-family: Copperplate, Copperplate Gothic Light, fantasy;
+        font-size: 30px;
+        padding: 2px;
+        line-height: 20px;
+        text-decoration: none;
+        position: relative;
+      }
+
+      .image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .img {
+          height: 300px;
+          width: 300px;
+        }
+        .remove-image {
+          border-radius: 10px;
+          background-color: red;
+          color: white;
+          border: 2px solid white;
+
+          &:hover {
+            background-color: rgb(82, 14, 14);
+            border: 2px solid black;
+          }
+        }
+      }
+      .label {
+        background-color: indigo;
+        color: white;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+      .save-profile {
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        background-color: gray;
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #ffbb00;
+          color: black;
+          border-radius: 5px;
+          transition: 0.3s ease;
+        }
+        &:disabled {
+          background-color: rgb(218, 218, 218);
+        }
+      }
+    }
+  }
 }
+// .setup-hide {
+//   display: none;
+// }

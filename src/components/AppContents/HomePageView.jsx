@@ -1,24 +1,15 @@
-import { useState } from "react"
+import { useState, useEffect, useContext } from "react";
+import { HomePageContext } from "../../context/HomePageContext";
 
+import MemeContainer from "./MemeContainer";
 
-export default function HomePageView () {
- return(
-        <div className="container">
-            <h1>safsafsa</h1>
-            <h2>fsafsfs</h2>
-            <h1>safsafsa</h1>
-            <h2>fsafsfs</h2>
-            <h1>safsafsa</h1>
-            <h2>fsafsfs</h2>
-            <h1>safsafsa</h1>
-            <h2>fsafsfs</h2>
-            <h1>safsafsa</h1>
-            <h2>fsafsfs</h2>
-            <h1>safsafsa</h1>
-            <h2>fsafsfs</h2>
-            <h1>safsafsa</h1>
-            <h2>fsafsfs</h2>
+export default function HomePageView() {
 
-        </div>
-    )
+  const [homePageData, setHomePageData] = useContext(HomePageContext);
+
+  return (
+    <div className="container">
+      <MemeContainer />
+    </div>
+  );
 }
