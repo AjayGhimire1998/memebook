@@ -1,24 +1,130 @@
 import { ProfileContext } from "../../context/ProfileContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { CreateMemeContext } from "../../context/CreateMemeContext";
+import "./CreateMeme.css";
 
-export default function CreateMeme({
-  preview,
-  setPreview,
-  showPreview,
-  removePreview,
-}) {
+export default function CreateMeme() {
   const [createMeme, setCreateMeme] = useContext(CreateMemeContext);
-  const [imageLoad, setImageLoad] = useState(null);
+  const [inputText, setInputText] = useState([]);
+  const [imageForMeme, setImageForMeme] = useState();
+  const [memesFromApi, setMemesFromApi] = useState();
+  const [currentGeneratedMeme, setCurrentGeneratedMeme] = useState();
   const history = useHistory();
+  const [idea, setIdea] = useState([]);
+
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((body) => {
+        setMemesFromApi([...body.data.memes]);
+      });
+  }, []);
 
   const handleInputChange = (e) => {
-    setCreateMeme({ ...createMeme, [e.target.name]: e.target.value });
+    setInputText({ ...inputText, [e.target.name]: e.target.value });
+    console.log(inputText.topText);
   };
+
+  const memesINeed = memesFromApi?.filter((meme) => {
+    return meme.box_count === 2;
+  });
+
+  const handleGenerate = (e) => {
+    e.preventDefault();
+    const randomMemeTemplate = Math.floor(Math.random() * memesINeed.length);
+    setCurrentGeneratedMeme(memesINeed[randomMemeTemplate]);
+    const randomMemeTemplateUrl = memesINeed[randomMemeTemplate].url;
+    setImageForMeme(randomMemeTemplateUrl);
+    console.log(memesINeed[randomMemeTemplate].box_count);
+    history.push(`/homeview/create/${memesINeed[randomMemeTemplate].name}`);
+  };
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+    const currentMeme = currentGeneratedMeme;
+    console.log(currentMeme);
+    const formData = new FormData();
+
+    formData.append("username", "ajay.gh");
+    formData.append("password", "Dharan123");
+    formData.append("template_id", currentMeme.id);
+    formData.append("text0", inputText.topText);
+    formData.append("text1", inputText.bottomText);
+
+    fetch("https://api.imgflip.com/caption_image", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((body) => {
+        console.log(body);
+        setCreateMeme(body.data);
+      })
+      .catch((error) => console.log("Error:", error));
+  };
+
+  const handleIdea = (e) => {
+    e.preventDefault();
+    fetch("https://jokeapi-v2.p.rapidapi.com/joke/Any?type=single", {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "jokeapi-v2.p.rapidapi.com",
+        "x-rapidapi-key": "285626be1emsh6252dd238a98631p1c38c5jsn328387bb55ff",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setIdea(data.joke);
+      });
+
+    const wordsMatch = idea.match(/(\w+)/g);
+    //    \w+    between one and unlimited word characters
+    //    /g     greedy - don't stop after the first match
+    const words = wordsMatch.length;
+    console.log(words);
+
+    if (words < 30) {
+      const firstHalf = idea.split(" ", words / 2).join(" ");
+      console.log(firstHalf);
+
+      const secondHalf = idea
+        .split(" ")
+        .slice(words / 2)
+        .join(" ");
+      console.log(secondHalf);
+
+      setInputText({ topText: firstHalf, bottomText: secondHalf });
+    }
+  };
+  const handleDownload = (e) => {
+    e.preventDefault();
+    fetch(createMeme.url, {
+      method: "GET",
+      headers: {},
+    }).then((res) => {
+      res
+        .arrayBuffer()
+        .then(function (buffer) {
+          const downloadUrl = window.URL.createObjectURL(new Blob([buffer]));
+          const link = document.createElement("a");
+          link.href = downloadUrl;
+          link.setAttribute("download", "memeFromApi.png" );
+          document.body.appendChild(link);
+          link.click();
+        })
+        .catch((error) => {
+          console.log("Error from download", error);
+        });
+    });
+    history.push("/homeview/upload")
+    setCreateMeme();
+  };
+
+  console.log(createMeme);
   return (
     <div className="container">
-      <div className="upload-show">
+      <div className="create-show">
         <form method="post" className="form">
           <label className="label-top">
             Alright, Lets Create a Meme
@@ -27,63 +133,56 @@ export default function CreateMeme({
             🤭
           </label>
           <br /> <br />
-          <br /> <br /> <br />
+          <button className="label" onClick={handleGenerate}>
+            Generate Meme Template
+          </button>
           <br />
-          {preview ? (
-            <div className="image">
-              <img
-                src={URL.createObjectURL(preview)}
-                className="img"
-                alt="profile-pic"
-              />
-              <br />
-              <button className="remove-image" onClick={removePreview}>
-                Remove
-              </button>
-            </div>
-          ) : null}
-          <br /> <br />
-          {/* <small>Upload Progress: {imageLoad}% done!!</small> */}
-          <br />
-          <label htmlFor="file-ip" className="label">
-            Choose Your Meme
-          </label>
-          <input
-            name="creatingMeme"
-            type="file"
-            id="file-ip"
-            accept="image/*"
-            onChange={(e) => {
-              showPreview(e);
-              handleInputChange(e);
-            }}
-            hidden
-          ></input>
-          <br /> <br /> <br />
           <label forhtml="fullName">Top Text: </label>
-          <br /> <br />
-          <input
+          <br />
+          <textarea
             type="text"
-            style={{ height: "auto", width: "auto" }}
             name="topText"
             onChange={handleInputChange}
-          ></input>
-          <br /> <br /> <br />
+          ></textarea>
+          <br />
           <label forhtml="fullName">Bottom Text: </label>
-          <br /> <br />
-          <input
+          <br />
+          <textarea
             type="text"
-            style={{ height: "auto", width: "auto" }}
             name="bottomText"
             onChange={handleInputChange}
-          ></input>
+          ></textarea>
+          <br /> <br/>
+          <label style={{fontFamily: "fantasy", fontWeight: "900", fontSize: "20px"}}>Click "Need Idea?" couple times to see Magic 🤭 </label>
+          <br/>
+          <label>⬇️⬇️⬇️</label>
+          <br/>
+          <button className="label" onClick={handleIdea}>
+            Need Idea?
+          </button>
+          <br/> <br/>
+          {imageForMeme ? (
+            <div className="meme">
+              <img src={imageForMeme} alt="meme" />
+              <h2 className="top">{inputText.topText}</h2>
+              <h2 className="bottom">{inputText.bottomText}</h2>
+            </div>
+          ) : null}
+          <br />
+          <button className="label" onClick={handleCreate}>
+            Create
+          </button>
           <br /> <br />
-          <button
-            className="save-profile"
-            // onClick={handleUpload}
-            disabled={imageLoad !== null && imageLoad < 100}
-          >
-            Save
+          {createMeme ? (
+            <img
+              src={createMeme.url}
+              alt="meme"
+              style={{ height: "auto", width: "auto" }}
+            />
+          ) : null}
+          <br /> <br />
+          <button className="label" onClick={handleDownload}>
+            Download
           </button>
         </form>
       </div>

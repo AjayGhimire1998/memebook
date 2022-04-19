@@ -11,7 +11,7 @@ function ProfileContextProvider({children}){
     },[profile])
 
     return (
-        <ProfileContext.Provider value={[profile, setProfile,profileAvailable, setProfileAvailable ]}>
+        <ProfileContext.Provider value={[profile, setProfile,profileAvailable, setProfileAvailable]}>
             {children}    
         </ProfileContext.Provider>
     );

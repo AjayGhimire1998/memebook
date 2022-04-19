@@ -7,21 +7,29 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection,addDoc} from "firebase/firestore";
 
 export default function Upload({
-  preview,
-  setPreview,
-  showPreview,
-  removePreview,
 }) {
   const [uploadMeme, setUploadMeme] = useContext(UploadMemeContext);
+  const [memeImageHehe, SetMemeImageHehe] = useState()
   const [imageLoad, setImageLoad] = useState(null);
   const history = useHistory();
 
+
+  function ShowPreview(e) {
+    if (e.target.files && e.target.files.length > 0) {
+      const src = e.target.files[0];
+      SetMemeImageHehe(src);
+    }
+  }
+  function RemovePreview() {
+    SetMemeImageHehe();
+  }
+
   useEffect(() => {
     const uploadFile = () => {
-      const name = new Date().getTime() + preview.name;
+      const name = new Date().getTime() + memeImageHehe.name;
       console.log(name);
-      const storageRef = ref(storage, preview.name);
-      const uploadTask = uploadBytesResumable(storageRef, preview);
+      const storageRef = ref(storage, memeImageHehe.name);
+      const uploadTask = uploadBytesResumable(storageRef, memeImageHehe);
 
       uploadTask.on(
         "state_changed",
@@ -52,8 +60,8 @@ export default function Upload({
         }
       );
     };
-    preview && uploadFile();
-  }, [preview]);
+    memeImageHehe && uploadFile();
+  }, [memeImageHehe]);
 
   const handleCaptionInput = (e) => {
     setUploadMeme({ ...uploadMeme, [e.target.name]: e.target.value });
@@ -72,7 +80,7 @@ export default function Upload({
       console.log(error);
     }
     history.push("/homeview");
-    setPreview();
+    SetMemeImageHehe();
   };
 
   return (
@@ -88,15 +96,15 @@ export default function Upload({
           <br /> <br />
           <br /> <br /> <br />
           <br />
-          {preview ? (
+          {memeImageHehe ? (
             <div className="image">
               <img
-                src={URL.createObjectURL(preview)}
+                src={URL.createObjectURL(memeImageHehe)}
                 className="img"
                 alt="profile-pic"
               />
               <br />
-              <button className="remove-image" onClick={removePreview}>
+              <button className="remove-image" onClick={RemovePreview}>
                 Remove
               </button>
             </div>
@@ -112,7 +120,7 @@ export default function Upload({
             id="file-ip"
             accept="image/*"
             onChange={(e) => {
-              showPreview(e);
+              ShowPreview(e);
               handleCaptionInput(e);
             }}
             hidden

@@ -8,9 +8,6 @@ import Upload from "./Upload";
 import { HomePageContext } from "../../context/HomePageContext";
 
 export default function HomePage() {
-  // const [profile, SetProfile] = useContext(ProfileContext);
-  const [homePageData, SetHomePageData] = useContext(HomePageContext);
-
   const [preview, setPreview] = useState();
   function ShowPreview(e) {
     if (e.target.files && e.target.files.length > 0) {
@@ -38,12 +35,7 @@ export default function HomePage() {
           />
         </Route>
         <Route path="/homeview/create">
-          <CreateMeme
-            preview={preview}
-            setPreview={setPreview}
-            showPreview={ShowPreview}
-            removePreview={RemovePreview}
-          />
+          <CreateMeme />
         </Route>
         <Route path="/homeview/setprofile">
           <SetUpAccount

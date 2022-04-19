@@ -1,9 +1,15 @@
+.container-meme-list{
+    display: grid;
+    justify-content: space-evenly;
+
+}
 .meme-container{
     justify-content: center;
     align-items: center;
     text-align: center;
     margin: 60px;
-    height: auto;
+    height: 700px;
+    width: 700px;
     border: 2px solid black;
     padding: 10px;
     background-color: rgba(255, 212, 94, 0.8);;

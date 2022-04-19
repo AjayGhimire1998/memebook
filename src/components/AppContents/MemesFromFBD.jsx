@@ -12,7 +12,7 @@ export default function MemesFromFBD() {
 
   useEffect(() => {
     getAllUploadedMemes();
-  }, [allUploadedMemes]);
+  }, []);
 
   const getAllUploadedMemes = async () => {
     const uploadedMemes = await getDocs(memeCollectionRef);
@@ -29,7 +29,6 @@ export default function MemesFromFBD() {
   const handleDelete = async(id) => {
       await deleteMeme(id);
       getAllUploadedMemes();
-
   }
 
   const userName = localStorage.getItem("profile", JSON.stringify(profile));
@@ -39,7 +38,7 @@ export default function MemesFromFBD() {
     const meme_url = meme.uploadedMemeImage;
     return (
       <div className="meme-container" key={index + 1}>
-        <h4 style={{ float: "left" }}>{parsedUserName.username}</h4>
+        <h4 style={{ float: "left" }}>{parsedUserName?.username}</h4>
         <br />
         <small
           style={{

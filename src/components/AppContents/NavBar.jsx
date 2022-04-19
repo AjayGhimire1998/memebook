@@ -1,21 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useHistory, Link } from "react-router-dom";
 import "./NavBar.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HomePageContext } from "../../context/HomePageContext";
 import { ProfileContext } from "../../context/ProfileContext";
-
+import avatar from "./images/user.png";
 export default function NavBar() {
   const [homePageData, setHomePageData, newMeme, setNewMeme] =
     useContext(HomePageContext);
 
-  const [profile, setProfile, profileAvailable, setProfileAvailable] =
+  const [profile, setProfile] =
     useContext(ProfileContext);
+
+  const [profilePicture, setProfilePicture] = useState();
   const history = useHistory();
 
-  const profilePic = localStorage.getItem("profile", JSON.stringify(profile));
-  const parsedProfilePic = JSON.parse(profilePic);
+  useEffect(()=> {
+    const profilePic = localStorage?.getItem("profile", JSON.stringify(profile));
+    const parsedProfilePic = JSON.parse(profilePic);
+    setProfilePicture(parsedProfilePic);
+  }, [profile])
+
+
+  // console.log(parsedProfilePic.profilePic)
 
   const getNewMemes = () => {
     fetch(`https://www.reddit.com/r/memes.json?after=${newMeme}`)
@@ -25,7 +33,9 @@ export default function NavBar() {
         setHomePageData(body.data.children);
       });
   };
-
+  // console.log(avatar);
+  // console.log(profile.profilePic)
+  // console.log(profileAvailable)
   return (
     <div className="nav-bar">
       <button
@@ -45,6 +55,16 @@ export default function NavBar() {
         >
           Book
         </span>
+        <br />
+        <small
+          style={{
+            fontFamily: "fantasy",
+            fontSize: "15px",
+            fontStyle: "italic",
+          }}
+        >
+          Click Me to see Wonders..✨🔮🪄
+        </small>
       </button>
 
       <Link
@@ -63,8 +83,13 @@ export default function NavBar() {
           <NavLink
             to="/homeview/profile"
             className="meme-profile"
-            style={profileAvailable ? {backgroundImage: `url(${parsedProfilePic.profilePic})`}: {backgroundImage: `url(./images/user.png)`}}
+            style={
+              profilePicture
+                ? { backgroundImage: `url("${profilePicture?.profilePic}")` }
+                : { backgroundImage: `url(${avatar})` }
+            }
             title="Set Profile"
+            s
           ></NavLink>
         </Dropdown.Toggle>
 

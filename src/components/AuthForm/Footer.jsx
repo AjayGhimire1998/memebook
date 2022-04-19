@@ -4,10 +4,12 @@ export default function Footer() {
     return(
         <footer style={{
             position:"relative",
-            bottom:"0",
-            width:"100%",
-            height:"60px",
-            textAlign: "center"
+            right: "0",
+            bottom: "0",
+            left: "0",
+            padding:"15px",
+            textAlign: "center",
+            backgroundColor: "rgb(255, 212, 94)"
         }}>
             <small>©MemeBook</small>
         </footer>

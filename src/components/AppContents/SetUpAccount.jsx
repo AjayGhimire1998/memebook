@@ -12,8 +12,8 @@ export default function SetUpAccount({
   showPreview,
   removePreview,
 }) {
-  const [profile, setProfile, profileAvailable, setProfileAvailable] = useContext(ProfileContext);
-  const [setupShow, setSetupShow] = useState(true);
+  const [profile, setProfile, profileAvailable, setProfileAvailable] =
+    useContext(ProfileContext);
   const [imageLoad, setImageLoad] = useState(null);
   const history = useHistory();
 
@@ -21,20 +21,18 @@ export default function SetUpAccount({
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  const handleSave = async (e) => {
+  const handleSave = (e) => {
     e.preventDefault();
     try {
       const user = auth.currentUser;
-      await setDoc(doc(db, "users", user.uid), {
+      setDoc(doc(db, "users", user.uid), {
         ...profile,
-        timeStamp: serverTimestamp(),
+        // timeStamp: serverTimestamp(),
       });
+      history.push("/homeview");
     } catch (error) {
       console.log(error);
     }
-    history.push("/homeview");
-    setSetupShow(false);
-    setPreview();
   };
 
   useEffect(() => {
@@ -69,8 +67,6 @@ export default function SetUpAccount({
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             console.log("File available at", downloadURL);
             setProfile({ ...profile, profilePic: downloadURL });
-            setProfileAvailable(true);
-
           });
         }
       );
@@ -81,7 +77,7 @@ export default function SetUpAccount({
   console.log(profile);
 
   return (
-    <div className={setupShow ? "setup-show" : "setup-hide"}>
+    <div className="setup-show">
       <div className="container">
         <form method="post" className="form">
           <label className="label-top">
