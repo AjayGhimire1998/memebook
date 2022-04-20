@@ -33,7 +33,6 @@ export default function NavBar({ getAllUploadedMemes }) {
         setNewMeme(body.data.after);
         setHomePageData(body.data.children);
       });
-      ;
   };
 
   return (
@@ -41,9 +40,9 @@ export default function NavBar({ getAllUploadedMemes }) {
       <button
         className="meme-book"
         onClick={(e) => {
-          // getAllUploadedMemes(e);
-          history.push("/homeview");
+          getAllUploadedMemes(e);
           getNewMemes();
+          history.push("/homeview");
         }}
       >
         Meme <br />
@@ -90,14 +89,13 @@ export default function NavBar({ getAllUploadedMemes }) {
                 : { backgroundImage: `url(${avatar})` }
             }
             title="Set Profile"
-            s
           ></NavLink>
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item
             href=""
-            onClick={(e) => {
+            onClick={() => {
               history.push("/homeview/setprofile");
             }}
           >
@@ -105,7 +103,7 @@ export default function NavBar({ getAllUploadedMemes }) {
           </Dropdown.Item>
           <Dropdown.Item
             href=""
-            onClick={(e) => {
+            onClick={() => {
               window.localStorage.clear();
               history.push("/");
             }}

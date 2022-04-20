@@ -4,17 +4,15 @@ import { UploadMemeContext } from "../../context/UploadMemeContext";
 import { useHistory } from "react-router-dom";
 import { db, auth, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection,addDoc} from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ProfileContext } from "../../context/ProfileContext";
 
-export default function Upload({
-}) {
+export default function Upload({ getAllUploadedMemes }) {
   const [uploadMeme, setUploadMeme] = useContext(UploadMemeContext);
-  const [memeImageHehe, SetMemeImageHehe] = useState()
+  const [memeImageHehe, SetMemeImageHehe] = useState();
   const [imageLoad, setImageLoad] = useState(null);
   const [profile, setProfile] = useContext(ProfileContext);
   const history = useHistory();
-
 
   function ShowPreview(e) {
     if (e.target.files && e.target.files.length > 0) {
@@ -69,10 +67,7 @@ export default function Upload({
     setUploadMeme({ ...uploadMeme, [e.target.name]: e.target.value });
   };
 
-  const userName = localStorage?.getItem(
-    "profile",
-    JSON.stringify(profile)
-  );
+  const userName = localStorage?.getItem("profile", JSON.stringify(profile));
   const parsedUserName = JSON.parse(userName);
 
   const handleUpload = async (e) => {
@@ -82,14 +77,17 @@ export default function Upload({
       const memeCollectionRef = collection(db, "memes");
       await addDoc(memeCollectionRef, {
         username: parsedUserName?.username,
+        profilePic: parsedUserName?.profilePic,
         caption: uploadMeme.caption,
         uploadedMemeImage: uploadMeme.uploadedMeme,
+        timeStamp: serverTimestamp(),
       });
     } catch (error) {
       console.log(error);
     }
     history.push("/homeview");
     SetMemeImageHehe();
+    getAllUploadedMemes();
   };
 
   return (

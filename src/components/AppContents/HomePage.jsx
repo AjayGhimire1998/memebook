@@ -5,16 +5,12 @@ import CreateMeme from "./CreateMeme";
 import HomePageView from "./HomePageView";
 import SetUpAccount from "./SetUpAccount";
 import Upload from "./Upload";
-import { HomePageContext } from "../../context/HomePageContext";
 import { db, auth } from "../../firebase";
 import { doc, collection, getDocs, deleteDoc } from "firebase/firestore";
-import { ProfileContext } from "../../context/ProfileContext";
-import { UploadMemeContext } from "../../context/UploadMemeContext";
 
 export default function HomePage() {
   const [preview, setPreview] = useState();
-  const [allUploadedMemes, SetAllUploadedMemes] = useState([]);
-  // const [uploadMeme, setUploadMeme] = useContext(UploadMemeContext);
+  const [allUploadedMemes, setAllUploadedMemes] = useState([]);
 
   function ShowPreview(e) {
     if (e.target.files && e.target.files.length > 0) {
@@ -22,20 +18,16 @@ export default function HomePage() {
       setPreview(src);
     }
   }
+
   function RemovePreview() {
     setPreview();
   }
 
-  // const user = auth.currentUser;
   const memeCollectionRef = collection(db, "memes");
-
-  // useEffect(() => {
-  //   getAllUploadedMemes();
-  // }, []);
-
   const getAllUploadedMemes = async () => {
     const uploadedMemes = await getDocs(memeCollectionRef);
-    SetAllUploadedMemes(
+    // console.log(uploadedMemes.docs)
+    setAllUploadedMemes(
       uploadedMemes.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
     );
   };
@@ -53,9 +45,6 @@ export default function HomePage() {
   return (
     <div>
       <NavBar getAllUploadedMemes={getAllUploadedMemes} />
-      {/* <Route path="/homeview/feed">
-        <FeedContainer />
-      </Route> */}
       <Switch>
         <Route path="/homeview/upload">
           <Upload
@@ -63,6 +52,7 @@ export default function HomePage() {
             setPreview={setPreview}
             showPreview={ShowPreview}
             removePreview={RemovePreview}
+            getAllUploadedMemes={getAllUploadedMemes}
           />
         </Route>
         <Route path="/homeview/create">

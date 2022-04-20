@@ -177,7 +177,7 @@ export default function CreateMeme() {
             <img
               src={createMeme.url}
               alt="meme"
-              style={{ height: "80%", width: "90%" }}
+              style={{ height: "60%", width: "70%" }}
             />
           ) : null}
           <br /> <br />

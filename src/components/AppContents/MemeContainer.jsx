@@ -1,16 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { HomePageContext } from "../../context/HomePageContext";
 import "./MemeContainer.css";
-// import { ProfileContext } from "../../context/ProfileContext";
-import { UploadMemeContext } from "../../context/UploadMemeContext";
 import MemesFromFBD from "./MemesFromFBD";
 
-export default function MemeContainer({
-  allUploadedMemes,
-  getAllUploadedMemes,
-  deleteMeme,
-  handleDelete,
-}) {
+export default function MemeContainer({ allUploadedMemes, handleDelete }) {
   const [homePageData, setHomePageData] = useContext(HomePageContext);
 
   const memeToDisplay = homePageData.slice(2, 22).map((d, index) => {
@@ -50,8 +43,6 @@ export default function MemeContainer({
     <div>
       <MemesFromFBD
         allUploadedMemes={allUploadedMemes}
-        getAllUploadedMemes={getAllUploadedMemes}
-        deleteMeme={deleteMeme}
         handleDelete={handleDelete}
       />
       {memeToDisplay}

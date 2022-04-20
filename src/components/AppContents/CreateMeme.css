@@ -32,8 +32,8 @@
 }
 
 .meme > img {
-  height: 320px;
-  width: 400px;
+  height: 90%;
+  width: 100%;
 }
 .label-top {
   font-size: 30px;

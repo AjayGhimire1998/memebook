@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../context/ProfileContext";
 import "./SetUpAccount.scss";
 import { useHistory } from "react-router-dom";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db, auth, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
@@ -12,8 +12,7 @@ export default function SetUpAccount({
   showPreview,
   removePreview,
 }) {
-  const [profile, setProfile, profileAvailable, setProfileAvailable] =
-    useContext(ProfileContext);
+  const [profile, setProfile] = useContext(ProfileContext);
   const [imageLoad, setImageLoad] = useState(null);
   const history = useHistory();
 
@@ -51,10 +50,10 @@ export default function SetUpAccount({
           setImageLoad(progress);
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
+              // console.log("Upload is paused");
               break;
             case "running":
-              console.log("Upload is running");
+              // console.log("Upload is running");
               break;
             default:
               break;
@@ -115,7 +114,7 @@ export default function SetUpAccount({
           ) : null}
           <br />
           <br />
-          <small>Upload Progress: {imageLoad} done!!</small>
+          <small>Upload Progress: {imageLoad}% done!!</small>
           <br />
           <label htmlFor="file-ip" className="label">
             Choose Profile Picture{" "}
