@@ -23,7 +23,7 @@ export default function CreateMeme() {
 
   const handleInputChange = (e) => {
     setInputText({ ...inputText, [e.target.name]: e.target.value });
-    console.log(inputText.topText);
+    // console.log(inputText.topText);
   };
 
   const memesINeed = memesFromApi?.filter((meme) => {
@@ -36,14 +36,14 @@ export default function CreateMeme() {
     setCurrentGeneratedMeme(memesINeed[randomMemeTemplate]);
     const randomMemeTemplateUrl = memesINeed[randomMemeTemplate].url;
     setImageForMeme(randomMemeTemplateUrl);
-    console.log(memesINeed[randomMemeTemplate].box_count);
+    // console.log(memesINeed[randomMemeTemplate].box_count);
     history.push(`/homeview/create/${memesINeed[randomMemeTemplate].name}`);
   };
 
   const handleCreate = (e) => {
     e.preventDefault();
     const currentMeme = currentGeneratedMeme;
-    console.log(currentMeme);
+    // console.log(currentMeme);
     const formData = new FormData();
 
     formData.append("username", "ajay.gh");
@@ -58,7 +58,7 @@ export default function CreateMeme() {
     })
       .then((res) => res.json())
       .then((body) => {
-        console.log(body);
+        // console.log(body);
         setCreateMeme(body.data);
       })
       .catch((error) => console.log("Error:", error));
@@ -82,17 +82,17 @@ export default function CreateMeme() {
     //    \w+    between one and unlimited word characters
     //    /g     greedy - don't stop after the first match
     const words = wordsMatch.length;
-    console.log(words);
+    // console.log(words);
 
     if (words < 30) {
       const firstHalf = idea.split(" ", words / 2).join(" ");
-      console.log(firstHalf);
+      // console.log(firstHalf);
 
       const secondHalf = idea
         .split(" ")
         .slice(words / 2)
         .join(" ");
-      console.log(secondHalf);
+      // console.log(secondHalf);
 
       setInputText({ topText: firstHalf, bottomText: secondHalf });
     }
@@ -121,7 +121,7 @@ export default function CreateMeme() {
     setCreateMeme();
   };
 
-  console.log(createMeme);
+  // console.log(createMeme);
   return (
     <div className="container">
       <div className="create-show">
@@ -177,7 +177,7 @@ export default function CreateMeme() {
             <img
               src={createMeme.url}
               alt="meme"
-              style={{ height: "auto", width: "auto" }}
+              style={{ height: "80%", width: "90%" }}
             />
           ) : null}
           <br /> <br />

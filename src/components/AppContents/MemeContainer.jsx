@@ -5,15 +5,20 @@ import "./MemeContainer.css";
 import { UploadMemeContext } from "../../context/UploadMemeContext";
 import MemesFromFBD from "./MemesFromFBD";
 
-export default function MemeContainer() {
+export default function MemeContainer({
+  allUploadedMemes,
+  getAllUploadedMemes,
+  deleteMeme,
+  handleDelete,
+}) {
   const [homePageData, setHomePageData] = useContext(HomePageContext);
 
   const memeToDisplay = homePageData.slice(2, 22).map((d, index) => {
     if (d.data.post_hint === "image") {
       const image_url = d.data.url_overridden_by_dest;
       return (
-        <div className="container-meme-list">
-          <div className="meme-container" key={index}>
+        <div className="container-meme-list" key={index}>
+          <div className="meme-container">
             <h4 style={{ float: "left" }}>{d.data.author}:</h4>
             <br /> <br />
             <small
@@ -28,7 +33,7 @@ export default function MemeContainer() {
             </small>
             <br /> <br /> <br />
             <img src={image_url} alt={d.data.title} className="meme-image" />
-            <br /> <br /> <br/>
+            <br /> <br /> <br />
             <p>
               Likes:{" "}
               <small>
@@ -43,7 +48,12 @@ export default function MemeContainer() {
 
   return (
     <div>
-      <MemesFromFBD />
+      <MemesFromFBD
+        allUploadedMemes={allUploadedMemes}
+        getAllUploadedMemes={getAllUploadedMemes}
+        deleteMeme={deleteMeme}
+        handleDelete={handleDelete}
+      />
       {memeToDisplay}
     </div>
   );

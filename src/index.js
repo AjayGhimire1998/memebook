@@ -9,7 +9,7 @@ import { ProfileContextProvider } from "./context/ProfileContext";
 import { HomePageContextProvider } from "./context/HomePageContext";
 import { UploadMemeContextProvider } from "./context/UploadMemeContext";
 import { CreateMemeContextProvider } from "./context/CreateMemeContext";
-import { UploadCreatedMemeContextProvider } from "./context/UploadCreatedMemeContext";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,9 +19,7 @@ root.render(
         <HomePageContextProvider>
           <UploadMemeContextProvider>
             <CreateMemeContextProvider>
-              <UploadCreatedMemeContextProvider>
-                <App />
-              </UploadCreatedMemeContextProvider>
+              <App />
             </CreateMemeContextProvider>
           </UploadMemeContextProvider>
         </HomePageContextProvider>

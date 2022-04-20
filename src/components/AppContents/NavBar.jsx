@@ -6,22 +6,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { HomePageContext } from "../../context/HomePageContext";
 import { ProfileContext } from "../../context/ProfileContext";
 import avatar from "./images/user.png";
-export default function NavBar() {
+export default function NavBar({ getAllUploadedMemes }) {
   const [homePageData, setHomePageData, newMeme, setNewMeme] =
     useContext(HomePageContext);
 
-  const [profile, setProfile] =
-    useContext(ProfileContext);
+  const [profile, setProfile] = useContext(ProfileContext);
 
   const [profilePicture, setProfilePicture] = useState();
   const history = useHistory();
 
-  useEffect(()=> {
-    const profilePic = localStorage?.getItem("profile", JSON.stringify(profile));
+  useEffect(() => {
+    const profilePic = localStorage?.getItem(
+      "profile",
+      JSON.stringify(profile)
+    );
     const parsedProfilePic = JSON.parse(profilePic);
     setProfilePicture(parsedProfilePic);
-  }, [profile])
-
+  }, [profile]);
 
   // console.log(parsedProfilePic.profilePic)
 
@@ -32,15 +33,15 @@ export default function NavBar() {
         setNewMeme(body.data.after);
         setHomePageData(body.data.children);
       });
+      ;
   };
-  // console.log(avatar);
-  // console.log(profile.profilePic)
-  // console.log(profileAvailable)
+
   return (
     <div className="nav-bar">
       <button
         className="meme-book"
         onClick={(e) => {
+          // getAllUploadedMemes(e);
           history.push("/homeview");
           getNewMemes();
         }}

@@ -5,12 +5,14 @@ import { useHistory } from "react-router-dom";
 import { db, auth, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection,addDoc} from "firebase/firestore";
+import { ProfileContext } from "../../context/ProfileContext";
 
 export default function Upload({
 }) {
   const [uploadMeme, setUploadMeme] = useContext(UploadMemeContext);
   const [memeImageHehe, SetMemeImageHehe] = useState()
   const [imageLoad, setImageLoad] = useState(null);
+  const [profile, setProfile] = useContext(ProfileContext);
   const history = useHistory();
 
 
@@ -27,7 +29,7 @@ export default function Upload({
   useEffect(() => {
     const uploadFile = () => {
       const name = new Date().getTime() + memeImageHehe.name;
-      console.log(name);
+      // console.log(name);
       const storageRef = ref(storage, memeImageHehe.name);
       const uploadTask = uploadBytesResumable(storageRef, memeImageHehe);
 
@@ -36,14 +38,14 @@ export default function Upload({
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          // console.log("Upload is " + progress + "% done");
           setImageLoad(progress);
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
+              // console.log("Upload is paused");
               break;
             case "running":
-              console.log("Upload is running");
+              // console.log("Upload is running");
               break;
             default:
               break;
@@ -54,7 +56,7 @@ export default function Upload({
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
+            // console.log("File available at", downloadURL);
             setUploadMeme({ ...uploadMeme, uploadedMeme: downloadURL });
           });
         }
@@ -67,12 +69,19 @@ export default function Upload({
     setUploadMeme({ ...uploadMeme, [e.target.name]: e.target.value });
   };
 
+  const userName = localStorage?.getItem(
+    "profile",
+    JSON.stringify(profile)
+  );
+  const parsedUserName = JSON.parse(userName);
+
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-      const user = auth.currentUser;
-      const memeCollectionRef = collection(db, "users", user.uid, "memes");
+      // const user = auth.currentUser;
+      const memeCollectionRef = collection(db, "memes");
       await addDoc(memeCollectionRef, {
+        username: parsedUserName?.username,
         caption: uploadMeme.caption,
         uploadedMemeImage: uploadMeme.uploadedMeme,
       });
@@ -110,7 +119,7 @@ export default function Upload({
             </div>
           ) : null}
           <br /> <br />
-          <small>Upload Progress: {imageLoad} done!!</small>
+          <small>Upload Progress: {imageLoad}% done!!</small>
           <br />
           <label htmlFor="file-ip" className="label">
             Choose Your Meme

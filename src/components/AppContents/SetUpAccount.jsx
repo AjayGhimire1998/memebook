@@ -38,7 +38,7 @@ export default function SetUpAccount({
   useEffect(() => {
     const uploadFile = () => {
       const name = new Date().getTime() + preview.name;
-      console.log(name);
+      // console.log(name);
       const storageRef = ref(storage, preview.name);
       const uploadTask = uploadBytesResumable(storageRef, preview);
 
@@ -47,7 +47,7 @@ export default function SetUpAccount({
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          // console.log("Upload is " + progress + "% done");
           setImageLoad(progress);
           switch (snapshot.state) {
             case "paused":
@@ -65,7 +65,7 @@ export default function SetUpAccount({
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
+            // console.log("File available at", downloadURL);
             setProfile({ ...profile, profilePic: downloadURL });
           });
         }
@@ -74,7 +74,7 @@ export default function SetUpAccount({
     preview && uploadFile();
   }, [preview]);
 
-  console.log(profile);
+  // console.log(profile);
 
   return (
     <div className="setup-show">
