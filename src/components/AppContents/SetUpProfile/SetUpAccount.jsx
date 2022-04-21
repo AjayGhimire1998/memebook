@@ -1,32 +1,38 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ProfileContext } from "../../context/ProfileContext";
+import { ProfileContext } from "../../../context/ProfileContext";
 import "./SetUpAccount.scss";
 import { useHistory } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import { db, auth, storage } from "../../firebase";
+import { db, auth, storage } from "../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export default function SetUpAccount({
-  preview,
-  setPreview,
-  showPreview,
-  removePreview,
-}) {
-  const [profile, setProfile] = useContext(ProfileContext);
+export default function SetUpAccount() {
+  const { profile, setProfile } = useContext(ProfileContext);
   const [imageLoad, setImageLoad] = useState(null);
   const history = useHistory();
+  const [preview, setPreview] = useState();
+
+  function ShowPreview(e) {
+    if (e.target.files && e.target.files.length > 0) {
+      const src = e.target.files[0];
+      setPreview(src);
+    }
+  }
+
+  function RemovePreview() {
+    setPreview();
+  }
 
   const handleInputChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     try {
       const user = auth.currentUser;
-      setDoc(doc(db, "users", user.uid), {
+      await setDoc(doc(db, "users", user.uid), {
         ...profile,
-        // timeStamp: serverTimestamp(),
       });
       history.push("/homeview");
     } catch (error) {
@@ -36,8 +42,6 @@ export default function SetUpAccount({
 
   useEffect(() => {
     const uploadFile = () => {
-      const name = new Date().getTime() + preview.name;
-      // console.log(name);
       const storageRef = ref(storage, preview.name);
       const uploadTask = uploadBytesResumable(storageRef, preview);
 
@@ -46,25 +50,13 @@ export default function SetUpAccount({
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log("Upload is " + progress + "% done");
           setImageLoad(progress);
-          switch (snapshot.state) {
-            case "paused":
-              // console.log("Upload is paused");
-              break;
-            case "running":
-              // console.log("Upload is running");
-              break;
-            default:
-              break;
-          }
         },
         (error) => {
           console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // console.log("File available at", downloadURL);
             setProfile({ ...profile, profilePic: downloadURL });
           });
         }
@@ -72,8 +64,6 @@ export default function SetUpAccount({
     };
     preview && uploadFile();
   }, [preview]);
-
-  // console.log(profile);
 
   return (
     <div className="setup-show">
@@ -107,7 +97,7 @@ export default function SetUpAccount({
                 alt="profile-pic"
               />
               <br />
-              <button className="remove-image" onClick={removePreview}>
+              <button className="remove-image" onClick={RemovePreview}>
                 Remove
               </button>
             </div>
@@ -125,11 +115,21 @@ export default function SetUpAccount({
             id="file-ip"
             accept="image/*"
             onChange={(e) => {
-              showPreview(e);
+              ShowPreview(e);
               handleInputChange(e);
             }}
             hidden
           ></input>
+          <br /> <br />
+          <label
+            style={{
+              fontFamily: "fantasy",
+              fontWeight: "900",
+              fontSize: "20px",
+            }}
+          >
+            Please Refresh after Save
+          </label>
           <br /> <br />
           <button
             className="save-profile"

@@ -1,16 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 
 export default function MemesFromFBD({ allUploadedMemes, handleDelete }) {
   const uploadedMemeToDisplay = allUploadedMemes.map((meme, index) => {
     const meme_url = meme.uploadedMemeImage;
-    // const date = meme.timeStamp?.toDate().toDateString()
-    // const time = meme.timeStamp?.toDate().toLocaleTimeString
 
     return (
       <div className="container-meme-list" key={index}>
         <div className="meme-container">
           <h4 style={{ float: "left" }}>
             {meme.username}
+            <img
+              src={meme.profilePic}
+              style={{
+                height: "40px",
+                width: "40px",
+                border: "2px solid black",
+                borderRadius: "40px",
+              }}
+              alt="pp"
+            />
             <small
               style={{
                 fontSize: "10px",

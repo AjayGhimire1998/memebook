@@ -2,8 +2,8 @@ import { useHistory, NavLink } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import "./Login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import { AuthContext } from "../../context/AuthContext";
+import { auth } from "../../../firebase";
+import { AuthContext } from "../../../context/AuthContext";
 
 export default function Login() {
   const [error, setError] = useState(false);
@@ -12,7 +12,8 @@ export default function Login() {
   const [emptyEmailError, setEmptyEmailError] = useState("");
   const [emptyPasswordError, setEmptyPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [currentUser, setCurrentUser, userAvailable, setUserAvailable] = useContext(AuthContext);
+  const [currentUser, setCurrentUser, userAvailable, setUserAvailable] =
+    useContext(AuthContext);
 
   const history = useHistory();
 
@@ -52,7 +53,7 @@ export default function Login() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        setCurrentUser(user.email)
+        setCurrentUser(user.email);
         setUserAvailable(true);
         history.push("/homeview");
       })

@@ -3,15 +3,14 @@ import { NavLink, useHistory, Link } from "react-router-dom";
 import "./NavBar.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { HomePageContext } from "../../context/HomePageContext";
-import { ProfileContext } from "../../context/ProfileContext";
+import { HomePageContext } from "../../../context/HomePageContext";
+import { ProfileContext } from "../../../context/ProfileContext";
 import avatar from "./images/user.png";
+import { getNewMemes } from "../../Utilities/utility";
+
 export default function NavBar({ getAllUploadedMemes }) {
-  const [homePageData, setHomePageData, newMeme, setNewMeme] =
-    useContext(HomePageContext);
-
-  const [profile, setProfile] = useContext(ProfileContext);
-
+  const { setHomePageData, newMeme, setNewMeme } = useContext(HomePageContext);
+  const { profile } = useContext(ProfileContext);
   const [profilePicture, setProfilePicture] = useState();
   const history = useHistory();
 
@@ -24,24 +23,13 @@ export default function NavBar({ getAllUploadedMemes }) {
     setProfilePicture(parsedProfilePic);
   }, [profile]);
 
-  // console.log(parsedProfilePic.profilePic)
-
-  const getNewMemes = () => {
-    fetch(`https://www.reddit.com/r/memes.json?after=${newMeme}`)
-      .then((res) => res.json())
-      .then((body) => {
-        setNewMeme(body.data.after);
-        setHomePageData(body.data.children);
-      });
-  };
-
   return (
     <div className="nav-bar">
       <button
         className="meme-book"
         onClick={(e) => {
           getAllUploadedMemes(e);
-          getNewMemes();
+          getNewMemes(newMeme, setNewMeme, setHomePageData);
           history.push("/homeview");
         }}
       >
@@ -63,7 +51,7 @@ export default function NavBar({ getAllUploadedMemes }) {
             fontStyle: "italic",
           }}
         >
-          Click Me to see Wonders..✨🔮🪄
+          Click Me to see more Memes..✨🔮🪄
         </small>
       </button>
 

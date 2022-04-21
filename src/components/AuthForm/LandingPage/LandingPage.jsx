@@ -1,16 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./LandingPage.scss"
+import "./LandingPage.scss";
 
 export default function LandingPage() {
   return (
     <div className="landing-page">
       <h3>
-        Welcome to 
-        <br/> <br/>
+        Welcome to
+        <br /> <br />
         <span className="meme-book">MemeBook</span>
-        <br/> <br/> <br/> 
-        <small style={{ fontWeight: "200" }}> The Ultimate Meme App</small>
+        <br /> <br /> <br />
+        <small style={{ fontWeight: "200", fontSize: "18px" }}>
+          The Ultimate Meme App
+        </small>
       </h3>
       <br /> <br />
       <div className="landing-signup">

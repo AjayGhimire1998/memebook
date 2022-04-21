@@ -1,7 +1,7 @@
-import { ProfileContext } from "../../context/ProfileContext";
+import { ProfileContext } from "../../../context/ProfileContext";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { CreateMemeContext } from "../../context/CreateMemeContext";
+import { CreateMemeContext } from "../../../context/CreateMemeContext";
 import "./CreateMeme.css";
 
 export default function CreateMeme() {
@@ -23,7 +23,6 @@ export default function CreateMeme() {
 
   const handleInputChange = (e) => {
     setInputText({ ...inputText, [e.target.name]: e.target.value });
-    // console.log(inputText.topText);
   };
 
   const memesINeed = memesFromApi?.filter((meme) => {
@@ -36,14 +35,12 @@ export default function CreateMeme() {
     setCurrentGeneratedMeme(memesINeed[randomMemeTemplate]);
     const randomMemeTemplateUrl = memesINeed[randomMemeTemplate].url;
     setImageForMeme(randomMemeTemplateUrl);
-    // console.log(memesINeed[randomMemeTemplate].box_count);
     history.push(`/homeview/create/${memesINeed[randomMemeTemplate].name}`);
   };
 
   const handleCreate = (e) => {
     e.preventDefault();
     const currentMeme = currentGeneratedMeme;
-    // console.log(currentMeme);
     const formData = new FormData();
 
     formData.append("username", "ajay.gh");
@@ -58,7 +55,6 @@ export default function CreateMeme() {
     })
       .then((res) => res.json())
       .then((body) => {
-        // console.log(body);
         setCreateMeme(body.data);
       })
       .catch((error) => console.log("Error:", error));
@@ -79,20 +75,16 @@ export default function CreateMeme() {
       });
 
     const wordsMatch = idea.match(/(\w+)/g);
-    //    \w+    between one and unlimited word characters
-    //    /g     greedy - don't stop after the first match
+
     const words = wordsMatch.length;
-    // console.log(words);
 
     if (words < 30) {
       const firstHalf = idea.split(" ", words / 2).join(" ");
-      // console.log(firstHalf);
 
       const secondHalf = idea
         .split(" ")
         .slice(words / 2)
         .join(" ");
-      // console.log(secondHalf);
 
       setInputText({ topText: firstHalf, bottomText: secondHalf });
     }
@@ -109,7 +101,7 @@ export default function CreateMeme() {
           const downloadUrl = window.URL.createObjectURL(new Blob([buffer]));
           const link = document.createElement("a");
           link.href = downloadUrl;
-          link.setAttribute("download", "memeFromApi.png" );
+          link.setAttribute("download", "MemeBookMeme.png");
           document.body.appendChild(link);
           link.click();
         })
@@ -117,7 +109,7 @@ export default function CreateMeme() {
           console.log("Error from download", error);
         });
     });
-    history.push("/homeview/upload")
+    history.push("/homeview/upload");
     setCreateMeme();
   };
 
@@ -133,6 +125,18 @@ export default function CreateMeme() {
             🤭
           </label>
           <br /> <br />
+          <label
+            style={{
+              fontFamily: "fantasy",
+              fontWeight: "900",
+              fontSize: "20px",
+            }}
+          >
+            Click below to generate a template
+          </label>
+          <br />
+          <label>⬇️⬇️⬇️</label>
+          <br />
           <button className="label" onClick={handleGenerate}>
             Generate Meme Template
           </button>
@@ -152,15 +156,23 @@ export default function CreateMeme() {
             name="bottomText"
             onChange={handleInputChange}
           ></textarea>
-          <br /> <br/>
-          <label style={{fontFamily: "fantasy", fontWeight: "900", fontSize: "20px"}}>Click "Need Idea?" couple times to see Magic 🤭 </label>
-          <br/>
+          <br /> <br />
+          <label
+            style={{
+              fontFamily: "fantasy",
+              fontWeight: "900",
+              fontSize: "20px",
+            }}
+          >
+            Click "Need Idea?" couple times to see Magic 🤭{" "}
+          </label>
+          <br />
           <label>⬇️⬇️⬇️</label>
-          <br/>
+          <br />
           <button className="label" onClick={handleIdea}>
             Need Idea?
           </button>
-          <br/> <br/>
+          <br /> <br />
           {imageForMeme ? (
             <div className="meme">
               <img src={imageForMeme} alt="meme" />

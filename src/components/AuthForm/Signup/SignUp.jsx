@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth } from "../../../firebase";
 import { useHistory, NavLink } from "react-router-dom";
 import "./Signup.scss";
 
 export default function SignUp() {
-  const [emailIsValid, setEmailIsValid] = useState(false);
   const [error, setError] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
@@ -25,10 +24,8 @@ export default function SignUp() {
     const regex =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (regex.test(email)) {
-      setEmailIsValid(true);
       setError(false);
     } else {
-      setEmailIsValid(false);
       setError(true);
     }
   }

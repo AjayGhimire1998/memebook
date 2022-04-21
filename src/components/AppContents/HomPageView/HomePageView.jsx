@@ -10,7 +10,6 @@ export default function HomePageView({
     <div className="container">
       <MemeContainer
         allUploadedMemes={allUploadedMemes}
-        getAllUploadedMemes={getAllUploadedMemes}
         deleteMeme={deleteMeme}
         handleDelete={handleDelete}
       />

@@ -8,8 +8,6 @@ function HomePageContextProvider({ children }) {
   // const [loader, setLoader] = useState(true);
   const [newMeme, setNewMeme] = useState("")
 
-
-
   useEffect(() => {
     fetch(`https://www.reddit.com/r/memes.json?after=${newMeme}`)
       .then((res) => res.json())
@@ -19,7 +17,7 @@ function HomePageContextProvider({ children }) {
       });
   },[newMeme]);
   return (
-    <HomePageContext.Provider value={[homePageData, setHomePageData, newMeme, setNewMeme]}>
+    <HomePageContext.Provider value={{homePageData, setHomePageData, newMeme, setNewMeme}}>
       {children}
     </HomePageContext.Provider>
   );

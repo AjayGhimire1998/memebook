@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { HomePageContext } from "../../context/HomePageContext";
+import { HomePageContext } from "../../../context/HomePageContext";
 import "./MemeContainer.css";
 import MemesFromFBD from "./MemesFromFBD";
 
 export default function MemeContainer({ allUploadedMemes, handleDelete }) {
-  const [homePageData, setHomePageData] = useContext(HomePageContext);
+  const {homePageData} = useContext(HomePageContext);
 
   const memeToDisplay = homePageData.slice(2, 22).map((d, index) => {
     if (d.data.post_hint === "image") {

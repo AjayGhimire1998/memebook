@@ -2,7 +2,7 @@
   background-color: rgb(255, 212, 94);
   display: inline-flex;
   align-items: center;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   padding: 20px;
   color: black;
   width: 100%;
@@ -19,7 +19,7 @@
   position: relative;
   float: left;
   border: none;
-  background-color: rgb(255, 212, 94);;
+  background-color: rgb(255, 212, 94);
 }
 
 .meme-upload {
@@ -29,7 +29,7 @@
   background-color: rgb(255, 212, 94);
   background-size: 40px;
   background-repeat: no-repeat;
-  background-image: url(./images/add.PNG);
+  background-image: url(../images/add.PNG);
   text-decoration: none;
   margin-left: 100px;
   text-align: center;
@@ -39,7 +39,8 @@
   background-color: #ffbb00;
   color: black;
   border-radius: 12px;
-  transition: 0.3s ease;
+  transition: 1s ease;
+  transform: scale(1.2);
 }
 .meme-create {
   border: none;
@@ -48,7 +49,7 @@
   background-color: rgb(255, 212, 94);
   background-size: 47px;
   background-repeat: no-repeat;
-  background-image: url(./images/create.webp);
+  background-image: url(../images/create.webp);
   text-decoration: none;
   margin-left: 100px;
   text-align: center;
@@ -58,16 +59,17 @@
   background-color: #ffbb00;
   color: black;
   border-radius: 5px;
-  transition: 0.3s ease;
+  transition: 1s ease;
+  transform: scale(1.2);
 }
 .meme-profile {
-  border: none;
+  border: 2px solid black;
+  border-radius: 55px;
   cursor: pointer;
-  padding: 20px;
+  padding: 25px;
   background-color: rgb(255, 212, 94);
-  background-size: 50px;
+  background-size: 60px;
   background-repeat: no-repeat;
-  /* background-image: url(./images/user.png); */
   text-decoration: none;
   margin-left: 100px;
   text-align: center;
@@ -76,10 +78,10 @@
 .meme-profile:hover {
   background-color: #ffbb00;
   color: black;
-  border-radius: 12px;
-  transition: 0.3s ease;
+  border-radius: 20px;
+
 }
-#custom{
+#custom {
   background-color: rgb(255, 212, 94);
   border: none;
 }

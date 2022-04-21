@@ -1,17 +1,17 @@
 import "./Upload.scss";
 import { useContext, useState, useEffect } from "react";
-import { UploadMemeContext } from "../../context/UploadMemeContext";
+import { UploadMemeContext } from "../../../context/UploadMemeContext";
 import { useHistory } from "react-router-dom";
-import { db, auth, storage } from "../../firebase";
+import { db, storage } from "../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { ProfileContext } from "../../context/ProfileContext";
+import { ProfileContext } from "../../../context/ProfileContext";
 
 export default function Upload({ getAllUploadedMemes }) {
   const [uploadMeme, setUploadMeme] = useContext(UploadMemeContext);
   const [memeImageHehe, SetMemeImageHehe] = useState();
   const [imageLoad, setImageLoad] = useState(null);
-  const [profile, setProfile] = useContext(ProfileContext);
+  const { profile } = useContext(ProfileContext);
   const history = useHistory();
 
   function ShowPreview(e) {
@@ -26,8 +26,6 @@ export default function Upload({ getAllUploadedMemes }) {
 
   useEffect(() => {
     const uploadFile = () => {
-      const name = new Date().getTime() + memeImageHehe.name;
-      // console.log(name);
       const storageRef = ref(storage, memeImageHehe.name);
       const uploadTask = uploadBytesResumable(storageRef, memeImageHehe);
 
@@ -36,25 +34,13 @@ export default function Upload({ getAllUploadedMemes }) {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log("Upload is " + progress + "% done");
           setImageLoad(progress);
-          switch (snapshot.state) {
-            case "paused":
-              // console.log("Upload is paused");
-              break;
-            case "running":
-              // console.log("Upload is running");
-              break;
-            default:
-              break;
-          }
         },
         (error) => {
           console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // console.log("File available at", downloadURL);
             setUploadMeme({ ...uploadMeme, uploadedMeme: downloadURL });
           });
         }
@@ -73,7 +59,6 @@ export default function Upload({ getAllUploadedMemes }) {
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-      // const user = auth.currentUser;
       const memeCollectionRef = collection(db, "memes");
       await addDoc(memeCollectionRef, {
         username: parsedUserName?.username,
@@ -140,6 +125,7 @@ export default function Upload({ getAllUploadedMemes }) {
             style={{ height: "80px", width: "auto" }}
             name="caption"
             onChange={handleCaptionInput}
+            disabled={imageLoad !== null && imageLoad < 100}
           ></input>
           <br /> <br />
           <button
