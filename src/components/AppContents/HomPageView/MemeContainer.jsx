@@ -1,40 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
+import { DBDataContext } from "../../../context/DBDataContext";
 import { HomePageContext } from "../../../context/HomePageContext";
 import "./MemeContainer.css";
 import MemesFromFBD from "./MemesFromFBD";
+import SingleMeme from "./SingleMeme";
 
-export default function MemeContainer({ allUploadedMemes, handleDelete }) {
-  const {homePageData} = useContext(HomePageContext);
+export default function MemeContainer() {
+  const { homePageData } = useContext(HomePageContext);
+  const {allUploadedMemes, handleDelete} = useContext(DBDataContext)
 
   const memeToDisplay = homePageData.slice(2, 22).map((d, index) => {
     if (d.data.post_hint === "image") {
       const image_url = d.data.url_overridden_by_dest;
       return (
-        <div className="container-meme-list" key={index}>
-          <div className="meme-container">
-            <h4 style={{ float: "left" }}>{d.data.author}:</h4>
-            <br /> <br />
-            <small
-              style={{
-                fontStyle: "italic",
-                fontWeight: "300",
-                fontSize: "15px",
-                float: "left",
-              }}
-            >
-              {d.data.title}
-            </small>
-            <br /> <br /> <br />
-            <img src={image_url} alt={d.data.title} className="meme-image" />
-            <br /> <br /> <br />
-            <p>
-              Likes:{" "}
-              <small>
-                <i>{d.data.ups} ❤️</i>
-              </small>
-            </p>
-          </div>
-        </div>
+        <SingleMeme
+          key={index}
+          title={d.data.title}
+          author={d.data.author}
+          url={image_url}
+          likes={d.data.ups}
+        />
       );
     }
   });

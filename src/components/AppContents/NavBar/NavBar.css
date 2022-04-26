@@ -85,3 +85,20 @@
   background-color: rgb(255, 212, 94);
   border: none;
 }
+
+@media screen and (max-width: 700px) {
+  .nav-bar{
+    padding: 0;
+    justify-content: start;
+  }
+
+  .meme-upload{
+    margin: 20px;
+  }
+  .meme-create{
+    margin: 20px;
+  }
+  .meme-profile{
+    margin: 0;
+  }
+}

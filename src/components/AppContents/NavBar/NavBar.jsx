@@ -7,10 +7,13 @@ import { HomePageContext } from "../../../context/HomePageContext";
 import { ProfileContext } from "../../../context/ProfileContext";
 import avatar from "../images/user.png";
 import { getNewMemes } from "../../Utilities/utility";
+import { DBDataContext } from "../../../context/DBDataContext";
 
-export default function NavBar({ getAllUploadedMemes }) {
+
+export default function NavBar() {
   const { setHomePageData, newMeme, setNewMeme } = useContext(HomePageContext);
   const { profile } = useContext(ProfileContext);
+  const {getAllUploadedMemes} = useContext(DBDataContext)
   const [profilePicture, setProfilePicture] = useState();
   const history = useHistory();
 

@@ -10,9 +10,11 @@ function ProfileContextProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("profile", JSON.stringify(profile));
-    if (JSON.parse(localStorage.getItem("profile")))
+    if (JSON.parse(localStorage.getItem("profile"))) {
       return setProfileAvailable(true);
-    else return setProfileAvailable(false);
+    } else {
+      return setProfileAvailable(false);
+    }
   }, [profile]);
 
   return (

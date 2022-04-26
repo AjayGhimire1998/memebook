@@ -1,5 +1,6 @@
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+
 export const deleteMeme = (id) => {
   const memeDoc = doc(db, "memes", id);
   return deleteDoc(memeDoc);

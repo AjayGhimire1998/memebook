@@ -1,25 +1,45 @@
-.container-meme-list{
-    display: grid;
-    justify-content: space-evenly;
-
+.container-meme-list {
+  display: grid;
+  justify-content: space-evenly;
 }
-.meme-container{
+.meme-container {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 60px;
+  height: 700px;
+  width: 700px;
+  border: 2px solid black;
+  padding: 10px;
+  background-color: rgba(255, 212, 94, 0.8);
+}
+.meme-image {
+  height: 70%;
+  width: 80%;
+  transition: 1s ease-out;
+}
+.meme-image:hover {
+  transform: scale(0.9);
+}
+@media screen and (max-width: 700px) {
+  .container {
+    margin: 0;
+    padding: 0;
+  }
+  .meme-container {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 60px;
-    height: 700px;
-    width: 700px;
+    margin: 50px;
+    height: 400px;
+    width: 380px;
     border: 2px solid black;
     padding: 10px;
-    background-color: rgba(255, 212, 94, 0.8);;
-
-}
-.meme-image{
-    height: 70%;
+    background-color: rgba(255, 212, 94, 0.8);
+  }
+  .meme-image {
+    height: 60%;
     width: 80%;
     transition: 1s ease-out;
-}
-.meme-image:hover{
-    transform: scale(0.9);
+  }
 }

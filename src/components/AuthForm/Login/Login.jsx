@@ -4,46 +4,25 @@ import "./Login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { AuthContext } from "../../../context/AuthContext";
+import { SignUpContext } from "../../../context/SignUpContext";
 
 export default function Login() {
   const [error, setError] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emptyEmailError, setEmptyEmailError] = useState("");
-  const [emptyPasswordError, setEmptyPasswordError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [currentUser, setCurrentUser, userAvailable, setUserAvailable] =
-    useContext(AuthContext);
-
+  const [
+    currentUser, 
+    setCurrentUser, 
+    userAvailable, 
+    setUserAvailable
+  ] = useContext(AuthContext);
+  const {
+    tooglePassword,
+    showPassword,
+    handleEmailInput,
+    handlePasswordInput,
+    email,
+    password,
+  } = useContext(SignUpContext);
   const history = useHistory();
-
-  function tooglePassword() {
-    setShowPassword(!showPassword);
-  }
-
-  const emailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const passwordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const validateEmailInput = () => {
-    if (email.length === 0) {
-      setEmptyEmailError("Email must not be empty!");
-    } else {
-      setEmptyEmailError("");
-    }
-  };
-
-  const validatePasswordInput = () => {
-    if (password.length === 0) {
-      setEmptyPasswordError("Password must not be empty!");
-    } else {
-      setEmptyPasswordError("");
-    }
-  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -58,6 +37,7 @@ export default function Login() {
         history.push("/homeview");
       })
       .catch((error) => {
+        console.log("Error:", error)
         setError(true);
       });
   };
@@ -90,36 +70,20 @@ export default function Login() {
           <div>
             <br />
             <label htmlFor="first-name">Email: </label>
-            <input
-              type="email"
-              onChange={(e) => {
-                emailChange(e);
-                validateEmailInput();
-              }}
-            />
+            <input type="email" onChange={handleEmailInput} />
           </div>
           <br />
-          <small style={{ color: "red" }}>
-            <i>{emptyEmailError}</i>
-          </small>
           <div>
             <br />
             <label htmlFor="first-name">Password: </label>
             <input
               type={showPassword ? "text" : "password"}
-              onChange={(e) => {
-                passwordChange(e);
-                validatePasswordInput();
-              }}
+              onChange={handlePasswordInput}
             />
           </div>
           <input type="checkbox" onClick={tooglePassword} />
           <small>{showPassword ? " Hide " : " Show "} Password</small>
           <br />
-          <br />
-          <small style={{ color: "red" }}>
-            <i>{emptyPasswordError}</i>
-          </small>
           <br /> <br />
           <small>
             <i>

@@ -2,8 +2,14 @@
   background-color: #281c5f;
 }
 
+html, body{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 /* loading css */
-.loading-spin{
+/* .loading-spin{
   position: absolute;
   z-index: 15;
   top: 50%;
@@ -47,4 +53,5 @@
   87.5% {
     box-shadow: 0 -18px 0 0 #9880ff, 12.72984px -12.72984px 0 0 #9880ff, 18px 0 0 -5px rgba(152, 128, 255, 0), 12.72984px 12.72984px 0 -5px rgba(152, 128, 255, 0), 0 18px 0 -5px rgba(152, 128, 255, 0), -12.72984px 12.72984px 0 -5px rgba(152, 128, 255, 0), -18px 0 0 -5px rgba(152, 128, 255, 0), -12.72984px -12.72984px 0 0 #9880ff;
   }
-}
+} */
+

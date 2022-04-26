@@ -1,105 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase";
-import { useHistory, NavLink } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
 import "./Signup.scss";
+import { SignUpContext } from "../../../context/SignUpContext";
 
 export default function SignUp() {
-  const [error, setError] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPass, setShowConfirmPass] = useState(false);
-  const [passwordIsValid, setPasswordIsValid] = useState(false);
-  const [passwordIsValidError, setPasswordIsValidError] = useState(true);
-  const [requireTextField, setRequireTextField] = useState(false);
-  const [requiredError, setRequiredError] = useState("");
-
-  const [signError, setSignError] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPasword] = useState("");
-  const [confirmError, setConfirmError] = useState(true);
-
-  function validateEmail(e) {
-    const email = e.target.value;
-    const regex =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (regex.test(email)) {
-      setError(false);
-    } else {
-      setError(true);
-    }
-  }
-
-  function tooglePassword() {
-    setShowPassword(!showPassword);
-  }
-  function toogleConfirmPass() {
-    setShowConfirmPass(!showConfirmPass);
-  }
-
-  function validatePassword(e) {
-    const passWord = e.target.value;
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
-    if (passwordRegex.test(passWord)) {
-      setPasswordIsValid(true);
-      setPasswordIsValidError(false);
-    } else {
-      setPasswordIsValid(false);
-      setPasswordIsValidError(true);
-    }
-  }
-
-  function requiredField(e) {
-    if (e.target.value.length === 0) {
-      setRequireTextField(true);
-      setRequiredError("*required");
-    } else {
-      setRequireTextField(false);
-      setRequiredError("");
-    }
-  }
-
-  function handleEmailInput(e) {
-    setEmail(e.target.value);
-  }
-  function handlePasswordInput(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleConfirmPasswordInput(e) {
-    setConfirmPasword(e.target.value);
-  }
-
-  useEffect(() => {
-    if (password !== confirmPassword) {
-      // setPasswordMatch(false);
-      setConfirmError(true);
-    } else {
-      setConfirmError(false);
-    }
-  }, [confirmPassword]);
-
-  const history = useHistory();
-
-  function handleSignUpClick(e) {
-    e.preventDefault();
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        history.push("./login");
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.code === "auth/email-already-in-use") {
-          setSignError(error.message);
-        } else {
-          setSignError("All fields must have valid data!");
-        }
-      });
-  }
+  const {
+    error,
+    showPassword,
+    showConfirmPass,
+    passwordIsValid,
+    passwordIsValidError,
+    signError,
+    confirmError,
+    validatePassword,
+    validateEmail,
+    tooglePassword,
+    toogleConfirmPass,
+    handleEmailInput,
+    handlePasswordInput,
+    handleConfirmPasswordInput,
+    handleSignUpClick,
+  } = useContext(SignUpContext);
 
   return (
     <div>
@@ -136,14 +57,9 @@ export default function SignUp() {
               onChange={(e) => {
                 handleEmailInput(e);
                 validateEmail(e);
-                requiredField(e);
               }}
-              className={requireTextField ? "required-text" : ""}
             />
             <br />
-            <small style={{ color: "red" }}>
-              <i>{requiredError}</i>
-            </small>
             <br />
             <i>
               {error ? (
@@ -168,9 +84,6 @@ export default function SignUp() {
               className={passwordIsValid ? "" : "required-text"}
             />
             <br />
-            <small style={{ color: "red" }}>
-              <i>{requiredError}</i>
-            </small>
             <br />
             <input type="checkbox" onClick={tooglePassword} />
             <small>{showPassword ? " Hide " : " Show "} Password</small>
@@ -198,15 +111,11 @@ export default function SignUp() {
               type={showConfirmPass ? "text" : "password"}
               name="confirmPassword"
               onChange={(e) => {
-                requiredField(e);
                 handleConfirmPasswordInput(e);
               }}
-              className={requireTextField ? "required-text" : ""}
             />
             <br />
-            <small style={{ color: "red" }}>
-              <i>{requiredError}</i>
-            </small>
+
             <br />
             <input type="checkbox" onClick={toogleConfirmPass} />
             <small>{showConfirmPass ? " Hide " : " Show "} Password</small>
