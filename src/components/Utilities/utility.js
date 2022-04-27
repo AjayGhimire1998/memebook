@@ -14,3 +14,4 @@ export const getNewMemes = (newMeme, setNewMeme, setHomePageData) => {
       setHomePageData(body.data.children);
     });
 };
+

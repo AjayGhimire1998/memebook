@@ -9,22 +9,20 @@ import avatar from "../images/user.png";
 import { getNewMemes } from "../../Utilities/utility";
 import { DBDataContext } from "../../../context/DBDataContext";
 
-
-export default function NavBar() {
+export default function NavBar({ userDetails }) {
   const { setHomePageData, newMeme, setNewMeme } = useContext(HomePageContext);
-  const { profile } = useContext(ProfileContext);
-  const {getAllUploadedMemes} = useContext(DBDataContext)
-  const [profilePicture, setProfilePicture] = useState();
+  const { profile, setProfileAvailable } = useContext(ProfileContext);
+  const { getAllUploadedMemes } = useContext(DBDataContext);
   const history = useHistory();
 
   useEffect(() => {
-    const profilePic = localStorage?.getItem(
-      "profile",
-      JSON.stringify(profile)
-    );
-    const parsedProfilePic = JSON.parse(profilePic);
-    setProfilePicture(parsedProfilePic);
-  }, [profile]);
+    localStorage.setItem("profile", JSON.stringify(userDetails || null));
+    if (userDetails) {
+      setProfileAvailable(true);
+    } else {
+      setProfileAvailable(false);
+    }
+  }, [userDetails]);
 
   return (
     <div className="nav-bar">
@@ -56,6 +54,14 @@ export default function NavBar() {
         >
           Click Me to see more Memes..✨🔮🪄
         </small>
+        <br /> <br />
+        <small
+          style={{ fontSize: "20px", fontFamily: "Calibri", float: "left" }}
+        >
+          {profile?.username || userDetails?.username
+            ? `Welcome...${profile?.username || userDetails?.username}`
+            : `Welcome...`}
+        </small>
       </button>
 
       <Link
@@ -75,8 +81,12 @@ export default function NavBar() {
             to="/homeview/profile"
             className="meme-profile"
             style={
-              profilePicture
-                ? { backgroundImage: `url("${profilePicture?.profilePic}")` }
+              profile || userDetails
+                ? {
+                    backgroundImage: `url("${
+                      profile?.profilePic || userDetails?.profilePic
+                    }")`,
+                  }
                 : { backgroundImage: `url(${avatar})` }
             }
             title="Set Profile"
@@ -97,6 +107,7 @@ export default function NavBar() {
             onClick={() => {
               window.localStorage.clear();
               history.push("/");
+              window.location.reload();
             }}
           >
             Logout

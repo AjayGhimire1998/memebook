@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../../context/ProfileContext";
 import "./SetUpAccount.scss";
 import { useHistory } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db, auth, storage } from "../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import SetUpAccountForm from "./SetUpAccountForm";
 
-export default function SetUpAccount() {
+export default function SetUpAccount({getUserDetails}) {
   const { profile, setProfile } = useContext(ProfileContext);
   const [imageLoad, setImageLoad] = useState(null);
   const history = useHistory();
@@ -38,6 +39,7 @@ export default function SetUpAccount() {
     } catch (error) {
       console.log(error);
     }
+    getUserDetails();
   };
 
   useEffect(() => {
@@ -66,80 +68,13 @@ export default function SetUpAccount() {
   }, [preview]);
 
   return (
-    <div className="setup-show">
-      <div className="container">
-        <form method="post" className="form">
-          <label className="label-top">
-            Alright, Lets Create A Profile...hehe <br />
-            <br />
-            🤭
-          </label>
-          <br /> <br />
-          <label forhtml="fullName">Full Name: </label>
-          <input
-            type="text"
-            name="fullName"
-            onChange={handleInputChange}
-          ></input>
-          <br /> <br />
-          <label forhtml="fullName">username: </label>
-          <input
-            type="text"
-            name="username"
-            onChange={handleInputChange}
-          ></input>
-          <br /> <br /> <br /> <br /> <br /> <br />
-          {preview ? (
-            <div className="image">
-              <img
-                src={URL.createObjectURL(preview)}
-                className="img"
-                alt="profile-pic"
-              />
-              <br />
-              <button className="remove-image" onClick={RemovePreview}>
-                Remove
-              </button>
-            </div>
-          ) : null}
-          <br />
-          <br />
-          <small>Upload Progress: {imageLoad}% done!!</small>
-          <br />
-          <label htmlFor="file-ip" className="label">
-            Choose Profile Picture{" "}
-          </label>
-          <input
-            name="image"
-            type="file"
-            id="file-ip"
-            accept="image/*"
-            onChange={(e) => {
-              ShowPreview(e);
-              handleInputChange(e);
-            }}
-            hidden
-          ></input>
-          <br /> <br />
-          <label
-            style={{
-              fontFamily: "fantasy",
-              fontWeight: "900",
-              fontSize: "20px",
-            }}
-          >
-            Please Refresh after Save
-          </label>
-          <br /> <br />
-          <button
-            className="save-profile"
-            onClick={handleSave}
-            disabled={imageLoad !== null && imageLoad < 100}
-          >
-            Save
-          </button>
-        </form>
-      </div>
-    </div>
+    <SetUpAccountForm
+      preview={preview}
+      imageLoad={imageLoad}
+      ShowPreview={ShowPreview}
+      RemovePreview={RemovePreview}
+      handleInputChange={handleInputChange}
+      handleSave={handleSave}
+    />
   );
 }

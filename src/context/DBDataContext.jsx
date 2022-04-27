@@ -16,6 +16,7 @@ function DBDataContextProvider({ children }) {
     );
   };
 
+
   const handleDelete = async (id) => {
     await deleteMeme(id);
     getAllUploadedMemes();

@@ -3,7 +3,6 @@ import React from "react";
 export default function MemesFromFBD({ allUploadedMemes, handleDelete }) {
   const uploadedMemeToDisplay = allUploadedMemes.map((meme, index) => {
     const meme_url = meme.uploadedMemeImage;
-
     return (
       <div className="container-meme-list" key={index}>
         <div className="meme-container">
@@ -46,10 +45,10 @@ export default function MemesFromFBD({ allUploadedMemes, handleDelete }) {
           <img src={meme_url} alt={meme.caption} className="meme-image" />
           <br /> <br />
           <button
-            style={{ backgroundColor: "red" }}
+            style={{ backgroundColor: "rgba(0, 255, 244, 0.8)", border: "none" }}
             onClick={(e) => handleDelete(meme.id)}
           >
-            🗑
+            🙈 hide
           </button>
         </div>
       </div>

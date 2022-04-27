@@ -5,11 +5,22 @@ import SignUp from "./AuthForm/Signup/SignUp";
 import Login from "./AuthForm/Login/Login";
 import Footer from "./AuthForm/Footer";
 import HomePage from "./AppContents/HomPageView/HomePage";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { ProfileContext } from "../context/ProfileContext";
+import { db, auth } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function App() {
   const [userAvailable, SetUserAvailable] = useContext(AuthContext);
+  const [userDetails, setUserDetails] = useState();
+
+  const getUserDetails = async () => {
+    const user = auth?.currentUser;
+    const userRef = doc(db, "users", user.uid);
+    const uploadedDetails = await getDoc(userRef);
+    setUserDetails(uploadedDetails?.data());
+  };
 
   return (
     <div>
@@ -18,10 +29,17 @@ function App() {
           <SignUp />
         </Route>
         <Route path="/login">
-          <Login />
+          <Login getUserDetails={getUserDetails} userDetails={userDetails} />
         </Route>
         <Route path="/homeview">
-          {userAvailable ? <HomePage /> : <Redirect to="/" />}
+          {userAvailable ? (
+            <HomePage
+              userDetails={userDetails}
+              getUserDetails={getUserDetails}
+            />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Route>
         <Route path="/">
           <LandingPage />

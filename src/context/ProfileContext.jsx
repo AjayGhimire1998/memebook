@@ -9,17 +9,20 @@ function ProfileContextProvider({ children }) {
   const [profileAvailable, setProfileAvailable] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("profile", JSON.stringify(profile));
-    if (JSON.parse(localStorage.getItem("profile"))) {
-      return setProfileAvailable(true);
-    } else {
-      return setProfileAvailable(false);
+    localStorage?.setItem("profile", JSON.stringify(profile));
+    if (JSON.parse(localStorage?.getItem("profile"))) {
+      return setProfileAvailable(!profileAvailable);
     }
   }, [profile]);
 
   return (
     <ProfileContext.Provider
-      value={{ profile, setProfile, profileAvailable, setProfileAvailable }}
+      value={{
+        profile,
+        setProfile,
+        profileAvailable,
+        setProfileAvailable,
+      }}
     >
       {children}
     </ProfileContext.Provider>

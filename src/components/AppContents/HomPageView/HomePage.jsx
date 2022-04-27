@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import { Route, Switch, Redirect } from "react-router-dom";
 import CreateMeme from "../CreateMeme/CreateMeme";
@@ -7,12 +7,12 @@ import Upload from "../Upload/Upload";
 import { ProfileContext } from "../../../context/ProfileContext";
 import MemeContainer from "./MemeContainer";
 
-export default function HomePage() {
+export default function HomePage({ userDetails, getUserDetails }) {
   const { profileAvailable } = useContext(ProfileContext);
 
   return (
     <div>
-      <NavBar />
+      <NavBar userDetails={userDetails} />
       <Switch>
         <Route path="/homeview/upload">
           {profileAvailable ? (
@@ -29,7 +29,7 @@ export default function HomePage() {
           )}
         </Route>
         <Route path="/homeview/setprofile">
-          <SetUpAccount />
+          <SetUpAccount getUserDetails={getUserDetails} />
         </Route>
       </Switch>
       <MemeContainer />
