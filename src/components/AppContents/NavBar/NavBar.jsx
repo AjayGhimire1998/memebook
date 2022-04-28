@@ -58,9 +58,10 @@ export default function NavBar({ userDetails }) {
         <small
           style={{ fontSize: "20px", fontFamily: "Calibri", float: "left" }}
         >
-          {profile?.username || userDetails?.username
+          {/* {profile?.username || userDetails?.username
             ? `Welcome...${profile?.username || userDetails?.username}`
-            : `Welcome...`}
+            : `Welcome...`} */}
+            Welcome...{profile?.username || userDetails?.username || ""} 
         </small>
       </button>
 

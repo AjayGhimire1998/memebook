@@ -17,8 +17,10 @@ function App() {
 
   const getUserDetails = async () => {
     const user = auth?.currentUser;
+    console.log(user.uid)
     const userRef = doc(db, "users", user.uid);
     const uploadedDetails = await getDoc(userRef);
+    console.log(uploadedDetails.data());
     setUserDetails(uploadedDetails?.data());
   };
 

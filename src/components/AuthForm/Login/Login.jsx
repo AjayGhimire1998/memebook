@@ -40,8 +40,10 @@ export default function Login({ getUserDetails }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log(user)
         setCurrentUser(user.email);
         setUserAvailable(true);
+        getUserDetails();
         history.push("/homeview");
       })
       .catch((error) => {
@@ -49,7 +51,7 @@ export default function Login({ getUserDetails }) {
         setInvalidError(true);
       });
 
-    setTimeout(getUserDetails, 2000);
+    // setTimeout(getUserDetails, 2000);
   };
 
   return (

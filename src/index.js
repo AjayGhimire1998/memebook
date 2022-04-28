@@ -1,10 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/AuthContext";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { ProfileContextProvider } from "./context/ProfileContext";
 import { HomePageContextProvider } from "./context/HomePageContext";
 import { UploadMemeContextProvider } from "./context/UploadMemeContext";
@@ -12,9 +12,8 @@ import { CreateMemeContextProvider } from "./context/CreateMemeContext";
 import { SignUpContextProvider } from "./context/SignUpContext";
 import { DBDataContextProvider } from "./context/DBDataContext";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <BrowserRouter>
+ReactDOM.render(
+  <Router>
     <AuthContextProvider>
       <SignUpContextProvider>
         <ProfileContextProvider>
@@ -30,7 +29,8 @@ root.render(
         </ProfileContextProvider>
       </SignUpContextProvider>
     </AuthContextProvider>
-  </BrowserRouter>
+  </Router>,
+  document.getElementById("root")
 );
 
 reportWebVitals();

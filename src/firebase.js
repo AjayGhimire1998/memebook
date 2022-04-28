@@ -5,7 +5,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  apiKey: "AIzaSyDz-H_4azC5_YDKSE8p2iRtSk_AlNLT2rs",
   authDomain: "memebook-7734f.firebaseapp.com",
   projectId: "memebook-7734f",
   storageBucket: "memebook-7734f.appspot.com",
