@@ -16,19 +16,12 @@ function DBDataContextProvider({ children }) {
     );
   };
 
-
-  const handleDelete = async (id) => {
-    await deleteMeme(id);
-    getAllUploadedMemes();
-  };
-
   return (
     <DBDataContext.Provider
       value={{
         allUploadedMemes,
         setAllUploadedMemes,
         getAllUploadedMemes,
-        handleDelete,
       }}
     >
       {children}
@@ -36,4 +29,4 @@ function DBDataContextProvider({ children }) {
   );
 }
 
-export {DBDataContext, DBDataContextProvider};
+export { DBDataContext, DBDataContextProvider };

@@ -7,7 +7,7 @@ import SingleMeme from "./SingleMeme";
 
 export default function MemeContainer() {
   const { homePageData } = useContext(HomePageContext);
-  const {allUploadedMemes, handleDelete} = useContext(DBDataContext)
+  const { allUploadedMemes } = useContext(DBDataContext);
 
   const memeToDisplay = homePageData.slice(2, 22).map((d, index) => {
     if (d.data.post_hint === "image") {
@@ -26,10 +26,7 @@ export default function MemeContainer() {
 
   return (
     <div>
-      <MemesFromFBD
-        allUploadedMemes={allUploadedMemes}
-        handleDelete={handleDelete}
-      />
+      <MemesFromFBD allUploadedMemes={allUploadedMemes} />
       {memeToDisplay}
     </div>
   );

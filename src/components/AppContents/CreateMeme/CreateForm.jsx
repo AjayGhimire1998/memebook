@@ -1,17 +1,17 @@
 import React from "react";
 
 export default function CreateForm({
-    inputText,
-    createMeme,
-    imageForMeme,
-    handleInputChange,
-    handleGenerate,
-    handleCreate,
-    handleIdea,
-    handleDownload
+  inputText,
+  createMeme,
+  imageForMeme,
+  handleInputChange,
+  handleGenerate,
+  handleCreate,
+  handleIdea,
+  handleDownload,
 }) {
-    return(
-        <div className="container">
+  return (
+    <div className="container">
       <div className="create-show">
         <form method="post" className="form">
           <label className="label-top">
@@ -96,5 +96,5 @@ export default function CreateForm({
         </form>
       </div>
     </div>
-    )
+  );
 }
