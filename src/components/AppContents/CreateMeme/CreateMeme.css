@@ -82,7 +82,7 @@
   top: 0;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 500px) {
   .create-show {
     justify-content: center;
     align-items: center;
