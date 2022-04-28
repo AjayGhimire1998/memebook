@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
@@ -12,7 +12,8 @@ import { CreateMemeContextProvider } from "./context/CreateMemeContext";
 import { SignUpContextProvider } from "./context/SignUpContext";
 import { DBDataContextProvider } from "./context/DBDataContext";
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <Router>
     <AuthContextProvider>
       <SignUpContextProvider>
@@ -29,8 +30,7 @@ ReactDOM.render(
         </ProfileContextProvider>
       </SignUpContextProvider>
     </AuthContextProvider>
-  </Router>,
-  document.getElementById("root")
+  </Router>
 );
 
 reportWebVitals();
