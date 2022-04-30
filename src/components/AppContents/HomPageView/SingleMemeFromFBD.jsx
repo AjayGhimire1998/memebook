@@ -55,7 +55,7 @@ export default function SingleMemeFromFBD({
           src={memeUrl}
           alt={caption}
           className="meme-image"
-          style={{ filter: isHidden ? "blur(5px)" : "none" }}
+          style={{ filter: isHidden ? "blur(8px)" : "none" }}
         />
         <br /> <br />
         <button
