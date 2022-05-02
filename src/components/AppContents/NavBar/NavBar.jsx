@@ -47,7 +47,7 @@ export default function NavBar({ userDetails }) {
         <br />
         <small
           style={{
-            fontFamily: "fantasy",
+            fontFamily: "candara",
             fontSize: "15px",
             fontStyle: "italic",
           }}

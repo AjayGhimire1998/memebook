@@ -89,7 +89,7 @@
     text-align: center;
     height: auto;
     width: 100%;
-    margin: 5px;
+    margin: 20px 0px;
     padding: 0;
   }
   .meme {
@@ -105,9 +105,9 @@
   }
   .meme > h2 {
     padding: 0;
-    font-size: 1rem;
+    /* font-size: 1rem; */
     width: 100%;
-    font-size: smaller;
+    font-size: medium;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
   }
