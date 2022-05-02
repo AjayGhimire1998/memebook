@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/AuthContext";
-import { BrowserRouter as Router } from "react-router-dom";
+import {HashRouter } from "react-router-dom";
 import { ProfileContextProvider } from "./context/ProfileContext";
 import { HomePageContextProvider } from "./context/HomePageContext";
 import { UploadMemeContextProvider } from "./context/UploadMemeContext";
@@ -14,7 +14,7 @@ import { DBDataContextProvider } from "./context/DBDataContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Router>
+  <HashRouter >
     <AuthContextProvider>
       <SignUpContextProvider>
         <ProfileContextProvider>
@@ -30,7 +30,7 @@ root.render(
         </ProfileContextProvider>
       </SignUpContextProvider>
     </AuthContextProvider>
-  </Router>
+  </HashRouter>
 );
 
 reportWebVitals();
