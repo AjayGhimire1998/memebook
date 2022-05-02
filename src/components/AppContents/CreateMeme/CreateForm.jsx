@@ -23,7 +23,7 @@ export default function CreateForm({
           <br /> <br />
           <label
             style={{
-              fontFamily: "fantasy",
+              fontFamily: "Palantino",
               fontWeight: "900",
               fontSize: "20px",
             }}
@@ -55,7 +55,7 @@ export default function CreateForm({
           <br /> <br />
           <label
             style={{
-              fontFamily: "fantasy",
+              fontFamily: "Palantino",
               fontWeight: "900",
               fontSize: "20px",
             }}
