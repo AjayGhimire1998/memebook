@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/memebook/static/css/main.3d7010f7.css",
-    "main.js": "/memebook/static/js/main.d9d1b04b.js",
+    "main.js": "/memebook/static/js/main.e16ae632.js",
     "static/js/787.777a054b.chunk.js": "/memebook/static/js/787.777a054b.chunk.js",
     "static/media/create.webp": "/memebook/static/media/create.6b7ab10e3ae01ec8f812.webp",
     "static/media/add.PNG": "/memebook/static/media/add.4ae83809b5801d71f3fd.PNG",
     "index.html": "/memebook/index.html",
     "main.3d7010f7.css.map": "/memebook/static/css/main.3d7010f7.css.map",
-    "main.d9d1b04b.js.map": "/memebook/static/js/main.d9d1b04b.js.map",
+    "main.e16ae632.js.map": "/memebook/static/js/main.e16ae632.js.map",
     "787.777a054b.chunk.js.map": "/memebook/static/js/787.777a054b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d7010f7.css",
-    "static/js/main.d9d1b04b.js"
+    "static/js/main.e16ae632.js"
   ]
 }
