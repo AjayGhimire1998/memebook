@@ -98,7 +98,8 @@ export default function CreateMeme() {
       setInputText({ topText: firstHalf, bottomText: secondHalf });
     }
   };
-  const handleDownload = async(e) => {
+
+  const handleDownload = async (e) => {
     e.preventDefault();
     await fetch(createMeme.url, {
       method: "GET",
@@ -106,7 +107,9 @@ export default function CreateMeme() {
       res
         .arrayBuffer()
         .then(function (buffer) {
-          const downloadUrl = (window.URL || window.webkitURL).createObjectURL(new Blob([buffer]));
+          const downloadUrl = (window.URL || window.webkitURL).createObjectURL(
+            new Blob([buffer])
+          );
           const link = document.createElement("a");
           link.href = downloadUrl;
           link.setAttribute("download", "MemeBookMeme.png");

@@ -62,7 +62,7 @@
   text-transform: uppercase;
   color: white;
   /* letter-spacing: 1px; */
-  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   font-weight: 900;
   overflow: hidden;
@@ -107,6 +107,7 @@
     padding: 0;
     /* font-size: 1rem; */
     width: 100%;
+    font-family: impact;
     font-size: large;
     font-weight: 600;
     -webkit-text-stroke-width: 0.5px;
