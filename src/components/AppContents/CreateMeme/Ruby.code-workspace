@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../.."
+		},
+		{
+			"path": "../../../../../../Phase-3 RUBY"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "MemeGenerator"
+	}
+}

@@ -119,7 +119,7 @@ export default function CreateMeme() {
           console.log("Error from download", error);
         });
     });
-    history.push("/homevie w/upload");
+    history.push("/homeview/upload");
     setCreateMeme();
   };
   return (
