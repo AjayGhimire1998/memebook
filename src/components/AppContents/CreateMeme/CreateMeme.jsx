@@ -3,6 +3,7 @@ import { CreateMemeContext } from "../../../context/CreateMemeContext";
 import "./CreateMeme.css";
 import { useHistory } from "react-router-dom";
 import CreateForm from "./CreateForm";
+import { async } from "@firebase/util";
 
 export default function CreateMeme() {
   const {
@@ -97,15 +98,15 @@ export default function CreateMeme() {
       setInputText({ topText: firstHalf, bottomText: secondHalf });
     }
   };
-  const handleDownload = (e) => {
+  const handleDownload = async(e) => {
     e.preventDefault();
-    fetch(createMeme.url, {
+    await fetch(createMeme.url, {
       method: "GET",
     }).then((res) => {
       res
         .arrayBuffer()
         .then(function (buffer) {
-          const downloadUrl = window.URL.createObjectURL(new Blob([buffer]));
+          const downloadUrl = (window.URL || window.webkitURL).createObjectURL(new Blob([buffer]));
           const link = document.createElement("a");
           link.href = downloadUrl;
           link.setAttribute("download", "MemeBookMeme.png");
@@ -115,7 +116,7 @@ export default function CreateMeme() {
           console.log("Error from download", error);
         });
     });
-    history.push("/homeview/upload");
+    history.push("/homevie w/upload");
     setCreateMeme();
   };
   return (

@@ -36,7 +36,7 @@ export default function CreateForm({
           Generate Meme Template
         </button>
         <br />
-        <label forhtml="fullName">Top Text: </label>
+        <label forhtml="topText">Top Text: </label>
         <br />
         <textarea
           type="text"
@@ -44,7 +44,7 @@ export default function CreateForm({
           onChange={handleInputChange}
         ></textarea>
         <br />
-        <label forhtml="fullName">Bottom Text: </label>
+        <label forhtml="bottomText">Bottom Text: </label>
         <br />
         <textarea
           type="text"
