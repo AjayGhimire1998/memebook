@@ -61,6 +61,7 @@ export default function SetUpAccountForm({
           <input
             type="text"
             name="username"
+            maxLength="20"
             onChange={handleInputChange}
             disabled={imageLoad !== null && imageLoad < 100}
           ></input>

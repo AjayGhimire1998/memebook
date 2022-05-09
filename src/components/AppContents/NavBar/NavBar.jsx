@@ -61,7 +61,9 @@ export default function NavBar({ userDetails }) {
           {/* {profile?.username || userDetails?.username
             ? `Welcome...${profile?.username || userDetails?.username}`
             : `Welcome...`} */}
-            Welcome...{profile?.username || userDetails?.username || ""} 
+          Welcome...
+          <br/>
+          <span style={{color: "saddlebrown"  }}>{profile?.username || userDetails?.username || ""}</span>
         </small>
       </button>
 

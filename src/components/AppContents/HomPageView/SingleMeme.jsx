@@ -18,7 +18,7 @@ export default function SingleMeme({ title, url, author, likes }) {
     <div className="container-meme-list">
       <div className="meme-container">
         <h4 style={{ float: "left" }}>{author}:</h4>
-        <br />
+        <br /> <br/>
         <small
           style={{
             fontStyle: "italic",
@@ -29,7 +29,7 @@ export default function SingleMeme({ title, url, author, likes }) {
         >
           {title}
         </small>
-        <br />
+        <br /> <br/>
         <img src={url} alt={title} className="meme-image" />
         <br /> <br />
         {toogleLiker ? (

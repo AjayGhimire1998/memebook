@@ -15,7 +15,7 @@
 }
 .meme-image {
   height: 70%;
-  width: 80%;
+  width: 75%;
   transition: 1s ease-out;
 }
 .meme-image:hover {
@@ -31,7 +31,7 @@
     align-items: center;
     text-align: center;
     margin: 50px;
-    height: 400px;
+    height: 480px;
     width: 380px;
     border: 2px solid black;
     padding: 10px;
@@ -39,7 +39,7 @@
   }
   .meme-image {
     height: 60%;
-    width: 80%;
+    width: 75%;
     transition: 1s ease-out;
   }
 }

@@ -68,7 +68,8 @@
   cursor: pointer;
   padding: 25px;
   background-color: rgb(255, 212, 94);
-  background-size: 60px;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   text-decoration: none;
   margin-left: 100px;
@@ -89,7 +90,7 @@
 @media screen and (max-width: 700px) {
   .nav-bar{
     padding: 0;
-    justify-content: start;
+    justify-content: space-evenly;
   }
 
   .meme-upload{
