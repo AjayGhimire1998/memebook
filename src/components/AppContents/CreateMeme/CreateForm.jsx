@@ -59,7 +59,7 @@ export default function CreateForm({
             fontSize: "20px",
           }}
         >
-          Click "Need Idea?" couple times to see Magic 🤭{" "}
+          Click "Need Idea?" to see Magic 🤭{" "}
         </label>
         <br />
         <label>⬇️⬇️⬇️</label>
@@ -81,17 +81,20 @@ export default function CreateForm({
         </button>
         <br /> <br />
         {createMeme ? (
-          <img
-            className="final-meme"
-            src={createMeme.url}
-            alt="meme"
-            style={{ height: "60%", width: "70%" }}
-          />
+          <div className="processed-meme">
+            <img
+              className="final-meme"
+              src={createMeme.url}
+              alt="meme"
+              style={{ height: "60%", width: "70%" }}
+            />
+            <br /> <br />
+            <button className="downloadButton" onClick={handleDownload}>
+              Download
+            </button>
+          </div>
         ) : null}
         <br /> <br />
-        <button className="label" onClick={handleDownload}>
-          Download
-        </button>
       </form>
     </div>
   );

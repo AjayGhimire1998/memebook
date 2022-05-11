@@ -4,6 +4,7 @@ import "./CreateMeme.css";
 import { useHistory } from "react-router-dom";
 import CreateForm from "./CreateForm";
 import { async } from "@firebase/util";
+import { click } from "@testing-library/user-event/dist/click";
 
 export default function CreateMeme() {
   const {
@@ -69,9 +70,7 @@ export default function CreateMeme() {
       })
       .catch((error) => console.log("Error:", error));
   };
-
-  const handleIdea = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     fetch("https://jokeapi-v2.p.rapidapi.com/joke/Any?type=single", {
       method: "GET",
       headers: {
@@ -81,13 +80,17 @@ export default function CreateMeme() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setIdea(data.joke);
       });
+  }, [inputText]);
 
+  const handleIdea = (e) => {
+    e.preventDefault();
     const wordsMatch = idea.match(/(\w+)/g);
     const words = wordsMatch.length;
 
-    if (words < 30) {
+    if (words < 70) {
       const firstHalf = idea.split(" ", words / 2).join(" ");
 
       const secondHalf = idea
@@ -107,13 +110,26 @@ export default function CreateMeme() {
       res
         .arrayBuffer()
         .then(function (buffer) {
-          const downloadUrl = (window.URL || window.webkitURL).createObjectURL(
-            new Blob([buffer])
-          );
+          const downloadUrl = (
+            window.URL ||
+            window.webkitURL ||
+            window.BlobBuilder ||
+            window.WebKitBlobBuilder ||
+            window.MozBlobBuilder ||
+            window.MSBlobBuilder
+          ).createObjectURL(new Blob([buffer]));
+          console.log("download_url: ", downloadUrl);
           const link = document.createElement("a");
+          link.target = "_blank";
           link.href = downloadUrl;
           link.setAttribute("download", "MemeBookMeme.png");
+          console.log(link);
+          document.body.appendChild(link);
           link.click();
+          setTimeout(function () {
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(downloadUrl);
+          }, 100);
         })
         .catch((error) => {
           console.log("Error from download", error);
