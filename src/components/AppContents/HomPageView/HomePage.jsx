@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import NavBar from "../NavBar/NavBar";
 import { Route, Switch, Redirect } from "react-router-dom";
 import CreateMeme from "../CreateMeme/CreateMeme";

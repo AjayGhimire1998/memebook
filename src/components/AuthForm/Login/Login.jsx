@@ -1,11 +1,10 @@
 import { useHistory } from "react-router-dom";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./Login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { AuthContext } from "../../../context/AuthContext";
 import { SignUpContext } from "../../../context/SignUpContext";
-import { ProfileContext } from "../../../context/ProfileContext";
 import LoginForm from "./LoginForm";
 
 export default function Login({ getUserDetails }) {
@@ -40,7 +39,7 @@ export default function Login({ getUserDetails }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user)
+        // console.log(user)
         setCurrentUser(user.email);
         setUserAvailable(true);
         getUserDetails();

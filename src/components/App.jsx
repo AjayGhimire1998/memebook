@@ -5,14 +5,15 @@ import SignUp from "./AuthForm/Signup/SignUp";
 import Login from "./AuthForm/Login/Login";
 import Footer from "./AuthForm/Footer";
 import HomePage from "./AppContents/HomPageView/HomePage";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { ProfileContext } from "../context/ProfileContext";
 import { db, auth } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { ProfileContext } from "../context/ProfileContext";
 
 function App() {
   const [userAvailable, SetUserAvailable] = useContext(AuthContext);
+  const { profileAvailable } = useContext(ProfileContext);
   const [userDetails, setUserDetails] = useState();
 
   const getUserDetails = async () => {
@@ -44,7 +45,7 @@ function App() {
           )}
         </Route>
         <Route path="/">
-          <LandingPage />
+          {userAvailable ? <HomePage /> : <LandingPage />}
         </Route>
       </Switch>
       <Footer />

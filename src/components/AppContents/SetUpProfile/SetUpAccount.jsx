@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../../context/ProfileContext";
-import "./SetUpAccount.scss";
+import "./SetUpAccount.css";
 import { useHistory } from "react-router-dom";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc} from "firebase/firestore";
 import { db, auth, storage } from "../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import SetUpAccountForm from "./SetUpAccountForm";

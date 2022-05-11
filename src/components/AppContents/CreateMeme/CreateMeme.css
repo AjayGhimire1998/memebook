@@ -55,11 +55,11 @@
   text-align: center;
   left: 50%;
   transform: translateX(-50%);
-  margin: 10px 0;
+  margin: 5px 0;
   padding: 0 5px;
   font-family: impact;
   display: inline-block;
-  font-size: 2vw;
+  font-size: 3vw;
   text-transform: uppercase;
   color: white;
   /* letter-spacing: 1px; */
@@ -69,7 +69,6 @@
   overflow: hidden;
   max-width: 30ch;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow-wrap: break-word;
@@ -93,7 +92,7 @@
   margin-top: 1rem;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .create-show {
     justify-content: center;
     align-items: center;

@@ -1,7 +1,8 @@
 import React from "react";
 
 export default function CreateForm({
-  inputText,
+  topText,
+  bottomText,
   createMeme,
   imageForMeme,
   handleInputChange,
@@ -71,8 +72,8 @@ export default function CreateForm({
         {imageForMeme ? (
           <div className="meme">
             <img src={imageForMeme} alt="meme" />
-            <h2 className="top">{inputText.topText}</h2>
-            <h2 className="bottom">{inputText.bottomText}</h2>
+            <h2 className="top">{topText}</h2>
+            <h2 className="bottom">{bottomText}</h2>
           </div>
         ) : null}
         <br />

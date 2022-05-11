@@ -1,10 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { CreateMemeContext } from "../../../context/CreateMemeContext";
 import "./CreateMeme.css";
 import { useHistory } from "react-router-dom";
 import CreateForm from "./CreateForm";
-import { async } from "@firebase/util";
-import { click } from "@testing-library/user-event/dist/click";
 
 export default function CreateMeme() {
   const {
@@ -21,6 +19,9 @@ export default function CreateMeme() {
     idea,
     setIdea,
   } = useContext(CreateMemeContext);
+  const [firstSetup, setFirstSetup] = useState();
+  const [secondDelivery, setSecondDelivery] = useState();
+  const [counterForFetch, setCounterForFetch] = useState(0);
 
   const history = useHistory();
 
@@ -49,13 +50,38 @@ export default function CreateMeme() {
     history.push(`/homeview/create/${memesINeed[randomMemeTemplate].name}`);
   };
 
+  useEffect(() => {
+    fetch("https://jokeapi-v2.p.rapidapi.com/joke/Any?type=twopart", {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "jokeapi-v2.p.rapidapi.com",
+        "x-rapidapi-key": "285626be1emsh6252dd238a98631p1c38c5jsn328387bb55ff",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setIdea(data);
+      });
+  }, [counterForFetch]);
+
+  useEffect(() => {
+    setFirstSetup(idea.setup);
+    setSecondDelivery(idea.delivery);
+  }, [idea]);
+
+  const handleIdea = (e) => {
+    e.preventDefault();
+    setCounterForFetch(counterForFetch + 1);
+    setInputText({ topText: firstSetup, bottomText: secondDelivery });
+  };
+
   const handleCreate = (e) => {
     e.preventDefault();
     const currentMeme = currentGeneratedMeme;
     const formData = new FormData();
 
-    formData.append("username", "ajay.gh");
-    formData.append("password", "Dharan123");
+    formData.append("username", "AjayGhimire1998");
+    formData.append("password", "Ajay123@");
     formData.append("template_id", currentMeme.id);
     formData.append("text0", inputText.topText);
     formData.append("text1", inputText.bottomText);
@@ -70,41 +96,10 @@ export default function CreateMeme() {
       })
       .catch((error) => console.log("Error:", error));
   };
-  useEffect(() => {
-    fetch("https://jokeapi-v2.p.rapidapi.com/joke/Any?type=single", {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "jokeapi-v2.p.rapidapi.com",
-        "x-rapidapi-key": "285626be1emsh6252dd238a98631p1c38c5jsn328387bb55ff",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setIdea(data.joke);
-      });
-  }, [inputText]);
 
-  const handleIdea = (e) => {
+  const handleDownload = (e) => {
     e.preventDefault();
-    const wordsMatch = idea.match(/(\w+)/g);
-    const words = wordsMatch.length;
-
-    if (words < 70) {
-      const firstHalf = idea.split(" ", words / 2).join(" ");
-
-      const secondHalf = idea
-        .split(" ")
-        .slice(words / 2)
-        .join(" ");
-
-      setInputText({ topText: firstHalf, bottomText: secondHalf });
-    }
-  };
-
-  const handleDownload = async (e) => {
-    e.preventDefault();
-    await fetch(createMeme.url, {
+    fetch(createMeme.url, {
       method: "GET",
     }).then((res) => {
       res
@@ -118,12 +113,10 @@ export default function CreateMeme() {
             window.MozBlobBuilder ||
             window.MSBlobBuilder
           ).createObjectURL(new Blob([buffer]));
-          console.log("download_url: ", downloadUrl);
           const link = document.createElement("a");
           link.target = "_blank";
           link.href = downloadUrl;
           link.setAttribute("download", "MemeBookMeme.png");
-          console.log(link);
           document.body.appendChild(link);
           link.click();
           setTimeout(function () {
@@ -140,7 +133,8 @@ export default function CreateMeme() {
   };
   return (
     <CreateForm
-      inputText={inputText}
+      topText={inputText.topText}
+      bottomText={inputText.bottomText}
       createMeme={createMeme}
       imageForMeme={imageForMeme}
       handleInputChange={handleInputChange}
