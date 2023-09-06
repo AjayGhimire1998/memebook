@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SingleMemeFromFBD from "./SingleMemeFromFBD";
 
 export default function MemesFromFBD({ allUploadedMemes }) {
@@ -7,6 +7,7 @@ export default function MemesFromFBD({ allUploadedMemes }) {
     return (
       <SingleMemeFromFBD
         key={index}
+        memeId={meme.id}
         memeUrl={meme_url}
         username={meme.username}
         profilePic={meme.profilePic}

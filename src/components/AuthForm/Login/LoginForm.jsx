@@ -36,14 +36,13 @@ export default function LoginForm({
           >
             <label>Log In</label>
           </div>
+          <br />
           <div>
-            <br />
             <label htmlFor="first-name">Email: </label>
             <input type="email" onChange={handleEmailInput} />
           </div>
           <br />
           <div>
-            <br />
             <label htmlFor="first-name">Password: </label>
             <input
               type={showPassword ? "text" : "password"}
@@ -53,7 +52,18 @@ export default function LoginForm({
           <input type="checkbox" onClick={tooglePassword} />
           <small>{showPassword ? " Hide " : " Show "} Password</small>
           <br />
-          <br /> <br />
+          <br />
+          <small>Use Guest Credentials:</small>
+          <br />
+          <small>
+            <b>Email: </b> <i>guest@test.com</i>
+          </small>
+          <br />
+          <small>
+            <b>Password: </b> <i>@Guest123</i>
+          </small>
+          <br />
+          <br />
           <small>
             <i>
               By clicking the "Log In" button below, you will be directed to the
@@ -61,9 +71,9 @@ export default function LoginForm({
             </i>
           </small>
           <br /> <br />
-          {invalidError && (
+          {invalidError ? (
             <small style={{ color: "red" }}>Wrong Email or Password !!</small>
-          )}
+          ) : null}
           <br /> <br />
           <div className="landing-signup">
             <button className="login-button" onClick={handleLogin}>

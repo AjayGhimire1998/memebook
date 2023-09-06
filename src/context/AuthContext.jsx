@@ -16,9 +16,27 @@ function AuthContextProvider({ children }) {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
 
+  const [admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    const realAdmin = currentUser;
+    if (realAdmin === "ajay@gmail.com") {
+      setAdmin(true);
+    } else {
+      setAdmin(false);
+    }
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
-      value={[currentUser, setCurrentUser, userAvailable, setUserAvailable]}
+      value={[
+        currentUser,
+        setCurrentUser,
+        userAvailable,
+        setUserAvailable,
+        admin,
+        setAdmin,
+      ]}
     >
       {children}
     </AuthContext.Provider>

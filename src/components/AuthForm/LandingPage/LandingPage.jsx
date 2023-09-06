@@ -36,6 +36,10 @@ export default function LandingPage() {
         <Link to="/login" className="login-button">
           LogIn
         </Link>
+        <br/>
+        <small>Use Guest Credentials:</small><br/>
+        <small><b>Email: </b> <i>guest@test.com</i></small>
+        <small><b>Password: </b> <i>@Guest123</i></small>
       </div>
     </div>
   );

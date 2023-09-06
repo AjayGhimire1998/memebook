@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { deleteMeme } from "../../Utilities/utility";
 
 export default function SingleMemeFromFBD({
+  memeId,
   username,
   profilePic,
   timeStamp,
@@ -8,10 +11,22 @@ export default function SingleMemeFromFBD({
   caption,
 }) {
   const [isHidden, setHidden] = useState(false);
+  const [
+    currentUser,
+    setCurrentUser,
+    userAvailable,
+    setUserAvailable,
+    admin,
+    setAdmin,
+  ] = useContext(AuthContext);
 
   function handleHide() {
     setHidden(!isHidden);
   }
+
+  const handleDelete = async (id) => {
+    deleteMeme(id);
+  };
   return (
     <div className="container-meme-list">
       <div className="meme-container">
@@ -27,24 +42,26 @@ export default function SingleMemeFromFBD({
             }}
             alt="pp"
           />
-          <small
-            style={{
-              fontSize: "10px",
-              fontStyle: "italic",
-              fontWeight: "300",
-            }}
-          >
-            (Uploaded on:
-            {timeStamp?.toDate().toDateString()} at
-            {timeStamp?.toDate().toLocaleTimeString()})
-          </small>
         </h4>
         <br />
         <small
           style={{
+            fontSize: "10px",
             fontStyle: "italic",
-            fontWeight: "400",
-            fontSize: "20px",
+            fontWeight: "300",
+            float: "left"
+          }}
+        >
+          (Uploaded on:
+          {timeStamp?.toDate().toDateString()} at
+          {timeStamp?.toDate().toLocaleTimeString()})
+        </small>
+        <br /> <br/>
+        <small
+          style={{
+            fontStyle: "italic",
+            fontWeight: "300",
+            fontSize: "15px",
             float: "left",
           }}
         >
@@ -69,6 +86,20 @@ export default function SingleMemeFromFBD({
         >
           {isHidden ? " 👀 see " : " 🙈 hide "}
         </button>
+        <br /> <br />
+        {admin ? (
+          <button
+            style={{
+              backgroundColor: "rgba(0, 255, 244, 0.8)",
+              border: "none",
+              padding: "0",
+            }}
+            onClick={(e) => handleDelete(memeId)}
+            // onClick={handleHide}
+          >
+            Delete
+          </button>
+        ) : null}
       </div>
     </div>
   );

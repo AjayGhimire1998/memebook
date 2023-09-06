@@ -40,7 +40,8 @@ export default function Login({ getUserDetails }) {
       .then((userCredential) => {
         const user = userCredential.user;
         // console.log(user)
-        setCurrentUser(user.email);
+        setCurrentUser(user?.email);
+        // console.log(currentUser);
         setUserAvailable(true);
         getUserDetails();
         history.push("/homeview");

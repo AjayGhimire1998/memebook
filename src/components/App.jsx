@@ -9,11 +9,9 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { db, auth } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { ProfileContext } from "../context/ProfileContext";
 
 function App() {
   const [userAvailable, SetUserAvailable] = useContext(AuthContext);
-  const { profileAvailable } = useContext(ProfileContext);
   const [userDetails, setUserDetails] = useState();
 
   const getUserDetails = async () => {

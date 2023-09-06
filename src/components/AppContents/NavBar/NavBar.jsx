@@ -31,7 +31,7 @@ export default function NavBar({ userDetails }) {
         onClick={(e) => {
           getAllUploadedMemes(e);
           getNewMemes(newMeme, setNewMeme, setHomePageData);
-          history.push("/homeview");
+          history.push("/homeview")
         }}
       >
         Meme <br />
