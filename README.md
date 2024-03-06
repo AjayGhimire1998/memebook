@@ -1,6 +1,6 @@
 # MemeBook - A Social Media App for Memes
 
-[Demo:](https://ajayghimire1998.github.io/memebook/#/)
+[Try here](https://ajayghimire1998.github.io/memebook/#/)
 
 ## Overview
 
