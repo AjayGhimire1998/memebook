@@ -37,21 +37,21 @@ MemeBook is a social media app developed using React.js and Firebase, designed f
    git clone https://github.com/AjayGhimire1998/memebook.git
 
 
-2. **Install Dependencies:
+2. **Install Dependencies:**
    ```bash
    cd memebook
    npm install
 
-2. **Set Up Firebase:
+3. **Set Up Firebase:**
 
 Create a Firebase project and obtain your configuration settings.
 Replace the Firebase configuration in src/firebase.js with your own.
 
-4. **Run the App:
+4. **Run the App:**
    ```bash
    npm start
    
-5. **Access MemeBook:
+5. **Access MemeBook:**
 Open your browser and navigate to http://localhost:3000 to use MemeBook locally.
 
 ## Contributing
