@@ -9,6 +9,12 @@ MemeBook is a social media app developed using React.js and Firebase, designed f
 
 
 ![Demo](./Memebook.gif)
+<br>
+<br>
+[Live Demo](https://youtu.be/JTJ3IyiqIqk?si=CjXrO9-23CzK0r2h)
+<br>
+<br>
+[![Live Demo](https://i.imgur.com/8nLFCVP.png)](https://youtu.be/JTJ3IyiqIqk?si=CjXrO9-23CzK0r2h "Everything Is AWESOME")
 
 
 ## Features
