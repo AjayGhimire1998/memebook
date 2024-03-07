@@ -2,13 +2,14 @@
 
 [Try here](https://ajayghimire1998.github.io/memebook/#/)
 
+
 ## Overview
 
 MemeBook is a social media app developed using React.js and Firebase, designed for the meme enthusiasts who love to explore, create, and share hilarious content. The app leverages React Hooks and Contexts for state management, integrates Jokes Rapid API, Reddit API, and ImgFlip API to provide a diverse range of content, and utilizes Firebase for secure authentication and efficient storage.
 
-[[Live Demo](https://youtu.be/JTJ3IyiqIqk?si=CjXrO9-23CzK0r2h)]
+[Live Demo](https://youtu.be/JTJ3IyiqIqk?si=CjXrO9-23CzK0r2h)
+<br>
 [![Live Demo](https://i.imgur.com/8nLFCVP.png)](https://youtu.be/JTJ3IyiqIqk?si=CjXrO9-23CzK0r2h "Everything Is AWESOME")
-
 
 
 ## Features
@@ -23,6 +24,7 @@ MemeBook is a social media app developed using React.js and Firebase, designed f
 
 5. **Contextualized Content:** Enjoy a personalized meme feed based on your preferences and interactions.
 
+
 ## Technologies Used
 
 - **React.js:** The front-end is built using React.js, providing a dynamic and responsive user interface.
@@ -36,6 +38,7 @@ MemeBook is a social media app developed using React.js and Firebase, designed f
 - **Reddit API:** Fetches memes from various subreddits, broadening the content available on MemeBook.
 
 - **ImgFlip API:** Empowers users to create memes on-the-fly with a variety of customizable templates.
+
 
 ## Getting Started
 
